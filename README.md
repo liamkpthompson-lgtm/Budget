@@ -32,7 +32,7 @@
 
   <div class="max-w-7xl mx-auto space-y-6">
 
-    <!-- Top Visual Hero Banner -->
+    <!-- Top Visual Hero Banner (No profile photos, names only) -->
     <header class="relative rounded-3xl overflow-hidden border border-slate-800 shadow-2xl">
       <img
         src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80"
@@ -56,64 +56,45 @@
               Liam &amp; Amy Budget Portal
             </h1>
             <p class="text-xs sm:text-sm text-slate-400">
-              Real-time household splits, personal cashflow &amp; expense tracking
+              Real-time joint household splits, personal cashflow &amp; expense tracking
             </p>
           </div>
         </div>
 
-        <!-- Contributor Avatars Pill -->
+        <!-- Names-Only Badge -->
         <div class="flex items-center gap-3 bg-slate-900/90 backdrop-blur-md border border-slate-800 px-4 py-2.5 rounded-2xl self-start sm:self-auto">
-          <div class="flex -space-x-2.5">
-            <img
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80"
-              alt="Liam"
-              class="w-9 h-9 rounded-full object-cover ring-2 ring-blue-500"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
-              alt="Amy"
-              class="w-9 h-9 rounded-full object-cover ring-2 ring-emerald-500"
-            />
-          </div>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
           <div class="text-xs">
-            <div class="font-bold text-white">Liam &amp; Amy</div>
+            <div class="font-bold text-white text-sm">Liam &amp; Amy</div>
             <div class="text-emerald-400 font-medium">Active Fortnight</div>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Navigation Tabs with Icons -->
+    <!-- Navigation Tabs -->
     <nav class="grid grid-cols-2 sm:grid-cols-4 gap-2">
       <button id="tab-btn-household" onclick="switchTab('household')" class="tab-active py-3 px-4 rounded-xl font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2">
-        <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
+        <span>🏠</span>
         <span>Household Dashboard</span>
       </button>
       <button id="tab-btn-personal" onclick="switchTab('personal')" class="tab-inactive py-3 px-4 rounded-xl font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2">
-        <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
+        <span>💼</span>
         <span>Personal Budget</span>
       </button>
       <button id="tab-btn-hh-log" onclick="switchTab('hh-log')" class="tab-inactive py-3 px-4 rounded-xl font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2">
-        <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-        </svg>
+        <span>🧾</span>
         <span>Household Expense Log</span>
       </button>
       <button id="tab-btn-p-log" onclick="switchTab('p-log')" class="tab-inactive py-3 px-4 rounded-xl font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2">
-        <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
+        <span>💳</span>
         <span>Personal Expense Log</span>
       </button>
     </nav>
 
     <!-- ==================== TAB 1: HOUSEHOLD DASHBOARD ==================== -->
     <section id="tab-household" class="space-y-6">
-      <!-- Top Surplus Cards with Icon Imagery -->
+      <!-- Top Surplus Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 flex items-start justify-between">
           <div>
@@ -121,10 +102,8 @@
             <div id="hh-kpi-monthly" class="text-2xl sm:text-3xl font-bold text-emerald-400 mt-1">$7,151.25</div>
             <div class="text-xs text-slate-500 mt-1">Total monthly unspent budget</div>
           </div>
-          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl shrink-0">
+            💰
           </div>
         </div>
 
@@ -134,10 +113,8 @@
             <div id="hh-kpi-fortnightly" class="text-2xl sm:text-3xl font-bold text-blue-400 mt-1">$3,295.85</div>
             <div class="text-xs text-slate-500 mt-1">Equivalent per fortnight</div>
           </div>
-          <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+          <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xl shrink-0">
+            📅
           </div>
         </div>
 
@@ -147,24 +124,18 @@
             <div id="hh-kpi-weekly" class="text-2xl sm:text-3xl font-bold text-indigo-400 mt-1">$1,647.92</div>
             <div class="text-xs text-slate-500 mt-1">Equivalent per week</div>
           </div>
-          <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+          <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xl shrink-0">
+            ⏱️
           </div>
         </div>
       </div>
 
       <!-- Income Split & Reconciliation Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Income Contributions & Fortnightly Split -->
+        <!-- Income Contributions & Fortnightly Split (Names only, no photos) -->
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 overflow-x-auto">
           <div class="flex items-center gap-2.5 mb-3">
-            <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
+            <span class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-sm">⚖️</span>
             <h2 class="text-base font-bold text-white">Income Contributions &amp; Fortnightly Split</h2>
           </div>
           <table class="w-full text-xs sm:text-sm text-left">
@@ -178,12 +149,7 @@
             </thead>
             <tbody class="divide-y divide-slate-800/70">
               <tr>
-                <td class="py-2.5 font-semibold text-white">
-                  <div class="flex items-center gap-2.5">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" alt="Liam" class="w-7 h-7 rounded-full object-cover ring-1 ring-blue-400" />
-                    <span>Liam</span>
-                  </div>
-                </td>
+                <td class="py-2.5 font-semibold text-white">Liam</td>
                 <td class="py-2.5 text-right">
                   <input id="liam-baseline" type="number" step="0.01" value="1875.00" onchange="updateContributors()" class="w-24 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-white focus:outline-none focus:border-blue-500" />
                 </td>
@@ -191,12 +157,7 @@
                 <td id="liam-dynamic-req" class="py-2.5 text-right font-semibold text-blue-400">$1,858.56</td>
               </tr>
               <tr>
-                <td class="py-2.5 font-semibold text-white">
-                  <div class="flex items-center gap-2.5">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Amy" class="w-7 h-7 rounded-full object-cover ring-1 ring-emerald-400" />
-                    <span>Amy</span>
-                  </div>
-                </td>
+                <td class="py-2.5 font-semibold text-white">Amy</td>
                 <td class="py-2.5 text-right">
                   <input id="amy-baseline" type="number" step="0.01" value="1450.00" onchange="updateContributors()" class="w-24 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-white focus:outline-none focus:border-blue-500" />
                 </td>
@@ -204,7 +165,7 @@
                 <td id="amy-dynamic-req" class="py-2.5 text-right font-semibold text-blue-400">$1,437.29</td>
               </tr>
               <tr class="font-bold bg-slate-800/40">
-                <td class="py-2.5 text-white pl-2">Total Fortnightly Income Pool</td>
+                <td class="py-2.5 text-white">Total Fortnightly Income Pool</td>
                 <td id="pool-baseline-total" class="py-2.5 text-right text-emerald-400">$3,325.00</td>
                 <td class="py-2.5 text-right text-slate-300">100.0%</td>
                 <td id="pool-dynamic-total" class="py-2.5 text-right text-blue-400">$3,295.85</td>
@@ -213,18 +174,14 @@
           </table>
         </div>
 
-        <!-- Budget Reconciliation & Buffer with Visual Banner -->
+        <!-- Budget Reconciliation & Buffer -->
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 flex flex-col justify-between">
           <div>
             <div class="relative h-20 rounded-xl overflow-hidden mb-4 border border-slate-800">
               <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80" alt="Savings buffer" class="w-full h-full object-cover opacity-35" />
               <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/75 to-transparent flex items-center px-4">
                 <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
+                  <span class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-sm">📈</span>
                   <h2 class="text-base font-bold text-white">Budget Reconciliation &amp; Buffer</h2>
                 </div>
               </div>
@@ -252,26 +209,22 @@
         </div>
       </div>
 
-      <!-- Household Category Table -->
+      <!-- Joint / Household Category Table (Monthly, Fortnightly & Weekly all editable) -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 overflow-x-auto">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <div class="flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-              </svg>
-            </div>
-            <h2 class="text-base sm:text-lg font-bold text-white">Household Budget Categories</h2>
+            <span class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-sm">🏡</span>
+            <h2 class="text-base sm:text-lg font-bold text-white">Joint Household Budget Categories</h2>
           </div>
-          <span class="text-xs text-slate-400">Edit monthly amounts to dynamically recalculate splits</span>
+          <span class="text-xs text-slate-400">✏️ Edit Monthly, Fortnightly, or Weekly amounts — the other columns calculate automatically</span>
         </div>
         <table class="w-full text-xs sm:text-sm text-left">
           <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px]">
             <tr>
               <th class="py-3 px-2">Category</th>
-              <th class="py-3 px-2 text-right">Monthly Budget</th>
-              <th class="py-3 px-2 text-right">Fortnightly Budget</th>
-              <th class="py-3 px-2 text-right">Weekly Budget</th>
+              <th class="py-3 px-2 text-right">✏️ Monthly Budget</th>
+              <th class="py-3 px-2 text-right">✏️ Fortnightly Budget</th>
+              <th class="py-3 px-2 text-right">✏️ Weekly Budget</th>
               <th class="py-3 px-2 text-right">Actual Spend</th>
               <th class="py-3 px-2 text-right">Surplus / Remaining</th>
             </tr>
@@ -279,7 +232,7 @@
           <tbody id="hh-category-tbody" class="divide-y divide-slate-800/70"></tbody>
           <tfoot class="border-t-2 border-slate-700 font-bold bg-slate-800/50 text-white">
             <tr>
-              <td class="py-3 px-2">Total</td>
+              <td class="py-3 px-2">Total Joint Budget</td>
               <td id="hh-tot-mo" class="py-3 px-2 text-right">$7,151.25</td>
               <td id="hh-tot-fn" class="py-3 px-2 text-right">$3,295.85</td>
               <td id="hh-tot-wk" class="py-3 px-2 text-right">$1,647.92</td>
@@ -293,12 +246,14 @@
 
     <!-- ==================== TAB 2: PERSONAL BUDGET ==================== -->
     <section id="tab-personal" class="hidden space-y-6">
-      <!-- Visual Personal Banner -->
-      <div class="relative h-28 rounded-2xl overflow-hidden border border-slate-800">
+      <!-- Visual Personal Banner (No profile photo) -->
+      <div class="relative h-24 rounded-2xl overflow-hidden border border-slate-800">
         <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1400&q=80" alt="Personal Wealth" class="w-full h-full object-cover opacity-30" />
         <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/85 to-transparent flex items-center justify-between px-6">
           <div class="flex items-center gap-3.5">
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Personal Profile" class="w-12 h-12 rounded-2xl object-cover ring-2 ring-blue-500" />
+            <div class="w-11 h-11 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-xl">
+              💼
+            </div>
             <div>
               <h2 class="text-lg sm:text-xl font-bold text-white">Personal Cashflow &amp; Discretionary Tracker</h2>
               <p class="text-xs text-slate-400">Manage fortnightly take-home pay, account splits, and savings targets</p>
@@ -324,20 +279,16 @@
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
           <div class="flex items-center justify-between">
             <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Total Fortnightly Expenses</div>
-            <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-            </svg>
+            <span>📤</span>
           </div>
           <div id="p-kpi-expenses" class="text-2xl font-bold text-white mt-2">$3,217.15</div>
-          <div id="p-kpi-expenses-sub" class="text-xs text-slate-400 mt-1.5">Fixed ($1,875) + Discretionary</div>
+          <div id="p-kpi-expenses-sub" class="text-xs text-slate-400 mt-1.5">Fixed ($1,875.00) + Discretionary</div>
         </div>
 
         <div class="bg-emerald-950/30 border border-emerald-500/40 rounded-2xl p-4">
           <div class="flex items-center justify-between">
             <div class="text-[11px] font-semibold uppercase tracking-wider text-emerald-300">Fortnightly Surplus To Save</div>
-            <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
+            <span>🏦</span>
           </div>
           <div id="p-kpi-fn-surplus" class="text-2xl font-bold text-emerald-400 mt-2">$182.85</div>
           <div class="text-xs text-emerald-300/70 mt-1.5">Target surplus to savings</div>
@@ -346,9 +297,7 @@
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
           <div class="flex items-center justify-between">
             <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Weekly Surplus Equivalent</div>
-            <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+            <span>⏱️</span>
           </div>
           <div id="p-kpi-wk-surplus" class="text-2xl font-bold text-indigo-400 mt-2">$91.42</div>
           <div id="p-kpi-wk-sub" class="text-xs text-slate-400 mt-1.5">Equiv. Pay: $1,700.00</div>
@@ -357,28 +306,29 @@
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
           <div class="flex items-center justify-between">
             <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Monthly Surplus Equivalent</div>
-            <svg class="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+            <span>🗓️</span>
           </div>
           <div id="p-kpi-mo-surplus" class="text-2xl font-bold text-blue-400 mt-2">$396.17</div>
           <div id="p-kpi-mo-sub" class="text-xs text-slate-400 mt-1.5">Equiv. Pay: $7,366.67</div>
         </div>
       </div>
 
-      <!-- Personal Budget Category Table -->
+      <!-- Personal Budget Category Table (Monthly, Fortnightly & Weekly all editable) -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 overflow-x-auto">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-          <h2 class="text-base sm:text-lg font-bold text-white">Personal Budget Breakdown</h2>
-          <span class="text-xs text-slate-400">Edit Monthly Budget to dynamically adjust Fortnightly &amp; Weekly targets</span>
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-sm">📋</span>
+            <h2 class="text-base sm:text-lg font-bold text-white">Personal Budget Breakdown</h2>
+          </div>
+          <span class="text-xs text-slate-400">✏️ Edit Monthly, Fortnightly, or Weekly targets — the other columns calculate automatically</span>
         </div>
         <table class="w-full text-xs sm:text-sm text-left">
           <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px]">
             <tr>
               <th class="py-3 px-2">Category</th>
-              <th class="py-3 px-2 text-right">Monthly Budget</th>
-              <th class="py-3 px-2 text-right">Fortnightly Budget</th>
-              <th class="py-3 px-2 text-right">Weekly Budget</th>
+              <th class="py-3 px-2 text-right">✏️ Monthly Budget</th>
+              <th class="py-3 px-2 text-right">✏️ Fortnightly Budget</th>
+              <th class="py-3 px-2 text-right">✏️ Weekly Budget</th>
               <th class="py-3 px-2 text-right">Actual Spend (FN)</th>
               <th class="py-3 px-2 text-right">Surplus / Remaining (FN)</th>
             </tr>
@@ -386,7 +336,7 @@
           <tbody id="p-category-tbody" class="divide-y divide-slate-800/70"></tbody>
           <tfoot class="border-t-2 border-slate-700 font-bold bg-slate-800/50 text-white">
             <tr>
-              <td class="py-3 px-2">Total</td>
+              <td class="py-3 px-2">Total Personal Budget</td>
               <td id="p-tot-mo" class="py-3 px-2 text-right">$6,970.50</td>
               <td id="p-tot-fn" class="py-3 px-2 text-right">$3,217.15</td>
               <td id="p-tot-wk" class="py-3 px-2 text-right">$1,608.58</td>
@@ -466,25 +416,25 @@
             </thead>
             <tbody class="divide-y divide-slate-800/70">
               <tr>
-                <td class="py-2.5 font-semibold text-white">Weekly</td>
+                <td class="py-2.5 font-semibold text-white">⏱️ Weekly</td>
                 <td id="freq-wk-pay" class="py-2.5 text-right">$1,700.00</td>
                 <td id="freq-wk-exp" class="py-2.5 text-right">$1,608.58</td>
                 <td id="freq-wk-sur" class="py-2.5 text-right font-semibold text-emerald-400">$91.42</td>
               </tr>
               <tr>
-                <td class="py-2.5 font-semibold text-white">Fortnightly</td>
+                <td class="py-2.5 font-semibold text-white">📅 Fortnightly</td>
                 <td id="freq-fn-pay" class="py-2.5 text-right">$3,400.00</td>
                 <td id="freq-fn-exp" class="py-2.5 text-right">$3,217.15</td>
                 <td id="freq-fn-sur" class="py-2.5 text-right font-semibold text-emerald-400">$182.85</td>
               </tr>
               <tr>
-                <td class="py-2.5 font-semibold text-white">Monthly</td>
+                <td class="py-2.5 font-semibold text-white">🗓️ Monthly</td>
                 <td id="freq-mo-pay" class="py-2.5 text-right">$7,366.67</td>
                 <td id="freq-mo-exp" class="py-2.5 text-right">$6,970.50</td>
                 <td id="freq-mo-sur" class="py-2.5 text-right font-semibold text-emerald-400">$396.17</td>
               </tr>
               <tr class="font-bold bg-slate-800/40 text-white">
-                <td class="py-2.5">Annual (26 Pays)</td>
+                <td class="py-2.5">🎯 Annual (26 Pays)</td>
                 <td id="freq-yr-pay" class="py-2.5 text-right">$88,400.00</td>
                 <td id="freq-yr-exp" class="py-2.5 text-right">$83,646.00</td>
                 <td id="freq-yr-sur" class="py-2.5 text-right text-emerald-400">$4,754.00</td>
@@ -508,31 +458,31 @@
           </thead>
           <tbody class="divide-y divide-slate-800/70">
             <tr>
-              <td class="py-2.5 font-semibold text-white">Fortnightly Take-Home Pay</td>
+              <td class="py-2.5 font-semibold text-white">💵 Fortnightly Take-Home Pay</td>
               <td id="p-rec-pay-bud" class="py-2.5 text-right">$3,400.00</td>
               <td id="p-rec-pay-act" class="py-2.5 text-right">$3,400.00</td>
               <td class="py-2.5 text-right">$0.00</td>
             </tr>
             <tr>
-              <td class="py-2.5 text-slate-300">Less: Fixed Household Transfer</td>
+              <td class="py-2.5 text-slate-300">🏡 Less: Fixed Household Transfer</td>
               <td id="p-rec-hh-bud" class="py-2.5 text-right">$1,875.00</td>
               <td id="p-rec-hh-act" class="py-2.5 text-right">$0.00</td>
               <td id="p-rec-hh-var" class="py-2.5 text-right">$1,875.00</td>
             </tr>
             <tr>
-              <td class="py-2.5 text-slate-300">Less: Personal Discretionary Spending</td>
+              <td class="py-2.5 text-slate-300">🛍️ Less: Personal Discretionary Spending</td>
               <td id="p-rec-disc-bud" class="py-2.5 text-right">$1,342.15</td>
               <td id="p-rec-disc-act" class="py-2.5 text-right">$0.00</td>
               <td id="p-rec-disc-var" class="py-2.5 text-right">$1,342.15</td>
             </tr>
             <tr class="font-semibold">
-              <td class="py-2.5 text-white">Total Fortnightly Outflows</td>
+              <td class="py-2.5 text-white">📤 Total Fortnightly Outflows</td>
               <td id="p-rec-out-bud" class="py-2.5 text-right">$3,217.15</td>
               <td id="p-rec-out-act" class="py-2.5 text-right">$0.00</td>
               <td id="p-rec-out-var" class="py-2.5 text-right">$3,217.15</td>
             </tr>
             <tr class="font-bold bg-emerald-950/30 text-emerald-400">
-              <td class="py-2.5">Net Surplus Available to Transfer to Savings</td>
+              <td class="py-2.5">🏦 Net Surplus Available to Transfer to Savings</td>
               <td id="p-rec-net-bud" class="py-2.5 text-right">$182.85</td>
               <td id="p-rec-net-act" class="py-2.5 text-right">$3,400.00</td>
               <td id="p-rec-net-var" class="py-2.5 text-right">$3,217.15</td>
@@ -548,7 +498,7 @@
         <div class="relative h-24 rounded-xl overflow-hidden mb-5 border border-slate-800">
           <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80" alt="Household Receipts" class="w-full h-full object-cover opacity-30" />
           <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent flex flex-col justify-center px-5">
-            <h2 class="text-base sm:text-lg font-bold text-white">Household Quick Expense Log</h2>
+            <h2 class="text-base sm:text-lg font-bold text-white">🧾 Household Quick Expense Log</h2>
             <p class="text-xs text-slate-400">Log purchases below to automatically update Household Dashboard actual spend and remaining surplus.</p>
           </div>
         </div>
@@ -586,7 +536,7 @@
         <div class="relative h-24 rounded-xl overflow-hidden mb-5 border border-slate-800">
           <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80" alt="Personal Transactions" class="w-full h-full object-cover opacity-30" />
           <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent flex flex-col justify-center px-5">
-            <h2 class="text-base sm:text-lg font-bold text-white">Personal Expense Log</h2>
+            <h2 class="text-base sm:text-lg font-bold text-white">💳 Personal Expense Log</h2>
             <p class="text-xs text-slate-400">Select a category for each personal transaction to automatically sync with your Personal Budget actual spend.</p>
           </div>
         </div>
@@ -628,33 +578,39 @@
   </div>
 
   <script>
-    // Household Categories with SVG Icon Badges
+    // Joint / Household Categories with Symbols
     const hhCategories = [
-      { id: 'hh-1', name: 'Mortgage / Rent', monthly: 3200.00, icon: '🏠' },
-      { id: 'hh-2', name: 'Groceries & Supermarkets', monthly: 1400.00, icon: '🛒' },
-      { id: 'hh-3', name: 'Electricity, Gas & Water', monthly: 520.00, icon: '⚡' },
-      { id: 'hh-4', name: 'Home & Contents Insurance', monthly: 380.00, icon: '🛡️' },
-      { id: 'hh-5', name: 'Council Rates & Levies', monthly: 451.25, icon: '🏛️' },
-      { id: 'hh-6', name: 'High-Speed Internet & Streaming', monthly: 160.00, icon: '📡' },
-      { id: 'hh-7', name: 'Home Maintenance & Garden', monthly: 440.00, icon: '🧰' },
-      { id: 'hh-8', name: 'Shared Dining & Household Fun', monthly: 600.00, icon: '🍽️' }
+      { id: 'hh-1', name: 'Mortgage / Rent', group: 'Housing', monthly: 3200.00, icon: '🏠' },
+      { id: 'hh-2', name: 'Groceries & Supermarkets', group: 'Essentials', monthly: 1400.00, icon: '🛒' },
+      { id: 'hh-3', name: 'Electricity, Gas & Water', group: 'Utilities', monthly: 520.00, icon: '⚡' },
+      { id: 'hh-4', name: 'Home & Contents Insurance', group: 'Protection', monthly: 380.00, icon: '🛡️' },
+      { id: 'hh-5', name: 'Council Rates & Levies', group: 'Property', monthly: 451.25, icon: '🏛️' },
+      { id: 'hh-6', name: 'High-Speed Internet & Streaming', group: 'Utilities', monthly: 160.00, icon: '📡' },
+      { id: 'hh-7', name: 'Home Maintenance & Garden', group: 'Upkeep', monthly: 440.00, icon: '🧰' },
+      { id: 'hh-8', name: 'Shared Dining & Household Fun', group: 'Lifestyle', monthly: 600.00, icon: '🍽️' }
     ];
 
-    // Personal Categories with Icons & Account Types
+    // Personal Categories with Symbols & Account Types
     const pCategories = [
-      { id: 'p-1', name: 'Fixed Household Transfer', monthly: 4062.50, account: 'Joint', icon: '🏡' },
-      { id: 'p-2', name: 'Personal Dining, Coffee & Social', monthly: 650.00, account: 'Spending', icon: '☕' },
-      { id: 'p-3', name: 'Fuel & Public Transport', monthly: 420.00, account: 'Spending', icon: '⛽' },
-      { id: 'p-4', name: 'Clothing, Grooming & Hobby', monthly: 443.00, account: 'Spending', icon: '🛍️' },
-      { id: 'p-5', name: 'Health, Gym & Medical Insurance', monthly: 545.00, account: 'Bills', icon: '💪' },
-      { id: 'p-6', name: 'Car Rego, Servicing & Insurance', monthly: 520.00, account: 'Bills', icon: '🚗' },
-      { id: 'p-7', name: 'Mobile Phone & Personal Apps', monthly: 330.00, account: 'Bills', icon: '📱' }
+      { id: 'p-1', name: 'Fixed Household Transfer', account: 'Joint', monthly: 4062.50, icon: '🏡' },
+      { id: 'p-2', name: 'Personal Dining, Coffee & Social', account: 'Spending', monthly: 650.00, icon: '☕' },
+      { id: 'p-3', name: 'Fuel & Public Transport', account: 'Spending', monthly: 420.00, icon: '⛽' },
+      { id: 'p-4', name: 'Clothing, Grooming & Hobby', account: 'Spending', monthly: 443.00, icon: '🛍️' },
+      { id: 'p-5', name: 'Health, Gym & Medical Insurance', account: 'Bills', monthly: 545.00, icon: '💪' },
+      { id: 'p-6', name: 'Car Rego, Servicing & Insurance', account: 'Bills', monthly: 520.00, icon: '🚗' },
+      { id: 'p-7', name: 'Mobile Phone & Personal Apps', account: 'Bills', monthly: 330.00, icon: '📱' }
     ];
 
     let hhExpenses = [];
     let pExpenses = [];
 
     const fmt = (n) => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    function getCategoryIcon(type, catName) {
+      const list = type === 'hh' ? hhCategories : pCategories;
+      const found = list.find(c => c.name === catName);
+      return found ? found.icon : '📌';
+    }
 
     function switchTab(tab) {
       ['household', 'personal', 'hh-log', 'p-log'].forEach(t => {
@@ -664,6 +620,7 @@
       });
     }
 
+    // Render Joint / Household Table (Monthly, Fortnightly, Weekly all editable)
     function renderHousehold() {
       const tbody = document.getElementById('hh-category-tbody');
       tbody.innerHTML = '';
@@ -671,12 +628,13 @@
       let totMo = 0, totFn = 0, totWk = 0, totAct = 0;
 
       hhCategories.forEach((cat, idx) => {
-        const fn = (cat.monthly * 12) / 26;
-        const wk = fn / 2;
+        const mo = cat.monthly;
+        const fn = (mo * 12) / 26;
+        const wk = (mo * 12) / 52;
         const actual = hhExpenses.filter(e => e.cat === cat.name).reduce((s, e) => s + e.amt, 0);
-        const rem = cat.monthly - actual;
+        const rem = mo - actual;
 
-        totMo += cat.monthly;
+        totMo += mo;
         totFn += fn;
         totWk += wk;
         totAct += actual;
@@ -686,15 +644,24 @@
             <td class="py-3 px-2 font-medium text-white">
               <div class="flex items-center gap-2.5">
                 <span class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-base shrink-0">${cat.icon}</span>
-                <span>${cat.name}</span>
+                <div>
+                  <div>${cat.name}</div>
+                  <span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">${cat.group}</span>
+                </div>
               </div>
             </td>
             <td class="py-3 px-2 text-right">
-              <input type="number" step="0.01" value="${cat.monthly.toFixed(2)}" onchange="updateHhCat(${idx}, this.value)"
+              <input type="number" step="0.01" value="${mo.toFixed(2)}" onchange="updateHhCat(${idx}, 'mo', this.value)"
                 class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-white focus:outline-none focus:border-blue-500" />
             </td>
-            <td class="py-3 px-2 text-right text-slate-300">${fmt(fn)}</td>
-            <td class="py-3 px-2 text-right text-slate-300">${fmt(wk)}</td>
+            <td class="py-3 px-2 text-right">
+              <input type="number" step="0.01" value="${fn.toFixed(2)}" onchange="updateHhCat(${idx}, 'fn', this.value)"
+                class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-blue-300 focus:outline-none focus:border-blue-500" />
+            </td>
+            <td class="py-3 px-2 text-right">
+              <input type="number" step="0.01" value="${wk.toFixed(2)}" onchange="updateHhCat(${idx}, 'wk', this.value)"
+                class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-indigo-300 focus:outline-none focus:border-blue-500" />
+            </td>
             <td class="py-3 px-2 text-right text-slate-300">${fmt(actual)}</td>
             <td class="py-3 px-2 text-right font-semibold ${rem >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${fmt(rem)}</td>
           </tr>
@@ -715,8 +682,16 @@
       updateContributors(totFn);
     }
 
-    function updateHhCat(idx, val) {
-      hhCategories[idx].monthly = parseFloat(val) || 0;
+    // Recalculate Household row from Monthly, Fortnightly, or Weekly input
+    function updateHhCat(idx, period, val) {
+      const num = parseFloat(val) || 0;
+      if (period === 'mo') {
+        hhCategories[idx].monthly = num;
+      } else if (period === 'fn') {
+        hhCategories[idx].monthly = (num * 26) / 12;
+      } else if (period === 'wk') {
+        hhCategories[idx].monthly = (num * 52) / 12;
+      }
       renderHousehold();
     }
 
@@ -746,6 +721,7 @@
       document.getElementById('rec-mo-buffer').textContent = fmt(moBuffer);
     }
 
+    // Render Personal Table (Monthly, Fortnightly, Weekly all editable)
     function renderPersonal() {
       const tbody = document.getElementById('p-category-tbody');
       tbody.innerHTML = '';
@@ -756,20 +732,21 @@
       let hhFnBud = 0, hhFnAct = 0;
 
       pCategories.forEach((cat, idx) => {
-        const fn = (cat.monthly * 12) / 26;
-        const wk = fn / 2;
+        const mo = cat.monthly;
+        const fn = (mo * 12) / 26;
+        const wk = (mo * 12) / 52;
         const actual = pExpenses.filter(e => e.cat === cat.name).reduce((s, e) => s + e.amt, 0);
         const rem = fn - actual;
 
-        totMo += cat.monthly;
+        totMo += mo;
         totFn += fn;
         totWk += wk;
         totAct += actual;
 
         if (cat.account === 'Spending') {
-          spendMo += cat.monthly; spendFn += fn; spendWk += wk; spendAct += actual;
+          spendMo += mo; spendFn += fn; spendWk += wk; spendAct += actual;
         } else if (cat.account === 'Bills') {
-          billsMo += cat.monthly; billsFn += fn; billsWk += wk; billsAct += actual;
+          billsMo += mo; billsFn += fn; billsWk += wk; billsAct += actual;
         } else {
           hhFnBud += fn; hhFnAct += actual;
         }
@@ -786,11 +763,17 @@
               </div>
             </td>
             <td class="py-3 px-2 text-right">
-              <input type="number" step="0.01" value="${cat.monthly.toFixed(2)}" onchange="updatePCat(${idx}, this.value)"
+              <input type="number" step="0.01" value="${mo.toFixed(2)}" onchange="updatePCat(${idx}, 'mo', this.value)"
                 class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-white focus:outline-none focus:border-blue-500" />
             </td>
-            <td class="py-3 px-2 text-right text-slate-300">${fmt(fn)}</td>
-            <td class="py-3 px-2 text-right text-slate-300">${fmt(wk)}</td>
+            <td class="py-3 px-2 text-right">
+              <input type="number" step="0.01" value="${fn.toFixed(2)}" onchange="updatePCat(${idx}, 'fn', this.value)"
+                class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-blue-300 focus:outline-none focus:border-blue-500" />
+            </td>
+            <td class="py-3 px-2 text-right">
+              <input type="number" step="0.01" value="${wk.toFixed(2)}" onchange="updatePCat(${idx}, 'wk', this.value)"
+                class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-indigo-300 focus:outline-none focus:border-blue-500" />
+            </td>
             <td class="py-3 px-2 text-right text-slate-300">${fmt(actual)}</td>
             <td class="py-3 px-2 text-right font-semibold ${rem >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${fmt(rem)}</td>
           </tr>
@@ -823,15 +806,23 @@
       document.getElementById('acc-tot-act').textContent = fmt(discAct);
       document.getElementById('acc-tot-rem').textContent = fmt(discFn - discAct);
 
-      updatePersonalPay();
+      updatePersonalPay(hhFnBud, hhFnAct, discFn, discAct);
     }
 
-    function updatePCat(idx, val) {
-      pCategories[idx].monthly = parseFloat(val) || 0;
+    // Recalculate Personal row from Monthly, Fortnightly, or Weekly input
+    function updatePCat(idx, period, val) {
+      const num = parseFloat(val) || 0;
+      if (period === 'mo') {
+        pCategories[idx].monthly = num;
+      } else if (period === 'fn') {
+        pCategories[idx].monthly = (num * 26) / 12;
+      } else if (period === 'wk') {
+        pCategories[idx].monthly = (num * 52) / 12;
+      }
       renderPersonal();
     }
 
-    function updatePersonalPay() {
+    function updatePersonalPay(hhFnBudOverride, hhFnActOverride, discFnOverride, discActOverride) {
       const fnPay = parseFloat(document.getElementById('p-pay-input').value) || 0;
       const wkPay = fnPay / 2;
       const moPay = (fnPay * 26) / 12;
@@ -847,7 +838,15 @@
       const moSurplus = moPay - totMoExp;
       const yrSurplus = yrPay - totYrExp;
 
+      // Calculate Fixed vs Discretionary for Reconciliation
+      const hhCat = pCategories.find(c => c.account === 'Joint');
+      const hhFnBud = hhFnBudOverride !== undefined ? hhFnBudOverride : (hhCat ? (hhCat.monthly * 12) / 26 : 0);
+      const hhFnAct = hhFnActOverride !== undefined ? hhFnActOverride : (hhCat ? pExpenses.filter(e => e.cat === hhCat.name).reduce((s, e) => s + e.amt, 0) : 0);
+      const discFnBud = discFnOverride !== undefined ? discFnOverride : (totFnExp - hhFnBud);
+      const discFnAct = discActOverride !== undefined ? discActOverride : (pExpenses.reduce((s, e) => s + e.amt, 0) - hhFnAct);
+
       document.getElementById('p-kpi-expenses').textContent = fmt(totFnExp);
+      document.getElementById('p-kpi-expenses-sub').textContent = `Fixed (${fmt(hhFnBud)}) + Discretionary`;
       document.getElementById('p-kpi-fn-surplus').textContent = fmt(fnSurplus);
       document.getElementById('p-kpi-wk-surplus').textContent = fmt(wkSurplus);
       document.getElementById('p-kpi-wk-sub').textContent = 'Equiv. Pay: ' + fmt(wkPay);
@@ -869,6 +868,23 @@
       document.getElementById('freq-yr-pay').textContent = fmt(yrPay);
       document.getElementById('freq-yr-exp').textContent = fmt(totYrExp);
       document.getElementById('freq-yr-sur').textContent = fmt(yrSurplus);
+
+      // Update Fortnightly Reconciliation Table
+      const totOutAct = hhFnAct + discFnAct;
+      document.getElementById('p-rec-pay-bud').textContent = fmt(fnPay);
+      document.getElementById('p-rec-pay-act').textContent = fmt(fnPay);
+      document.getElementById('p-rec-hh-bud').textContent = fmt(hhFnBud);
+      document.getElementById('p-rec-hh-act').textContent = fmt(hhFnAct);
+      document.getElementById('p-rec-hh-var').textContent = fmt(hhFnBud - hhFnAct);
+      document.getElementById('p-rec-disc-bud').textContent = fmt(discFnBud);
+      document.getElementById('p-rec-disc-act').textContent = fmt(discFnAct);
+      document.getElementById('p-rec-disc-var').textContent = fmt(discFnBud - discFnAct);
+      document.getElementById('p-rec-out-bud').textContent = fmt(totFnExp);
+      document.getElementById('p-rec-out-act').textContent = fmt(totOutAct);
+      document.getElementById('p-rec-out-var').textContent = fmt(totFnExp - totOutAct);
+      document.getElementById('p-rec-net-bud').textContent = fmt(fnSurplus);
+      document.getElementById('p-rec-net-act').textContent = fmt(fnPay - totOutAct);
+      document.getElementById('p-rec-net-var').textContent = fmt((fnPay - totOutAct) - fnSurplus);
     }
 
     function populateDropdowns() {
@@ -931,7 +947,9 @@
         tbody.innerHTML = list.map(item => `
           <tr>
             <td class="py-2.5 text-slate-400">${item.date}</td>
-            <td class="py-2.5 font-medium text-white">${item.cat}</td>
+            <td class="py-2.5 font-medium text-white">
+              <span class="mr-1.5">${getCategoryIcon(type, item.cat)}</span>${item.cat}
+            </td>
             <td class="py-2.5 text-slate-300">${item.desc}</td>
             <td class="py-2.5 text-right font-semibold text-white">${fmt(item.amt)}</td>
             <td class="py-2.5 text-right">
