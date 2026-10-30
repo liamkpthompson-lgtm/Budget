@@ -32,7 +32,7 @@
 
   <div class="max-w-7xl mx-auto space-y-6">
 
-    <!-- Top Visual Hero Banner (No profile photos, names only) -->
+    <!-- Top Visual Hero Banner -->
     <header class="relative rounded-3xl overflow-hidden border border-slate-800 shadow-2xl">
       <img
         src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80"
@@ -61,7 +61,6 @@
           </div>
         </div>
 
-        <!-- Names-Only Badge -->
         <div class="flex items-center gap-3 bg-slate-900/90 backdrop-blur-md border border-slate-800 px-4 py-2.5 rounded-2xl self-start sm:self-auto">
           <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
           <div class="text-xs">
@@ -132,7 +131,7 @@
 
       <!-- Income Split & Reconciliation Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Income Contributions & Fortnightly Split (Names only, no photos) -->
+        <!-- Income Contributions & Fortnightly Split -->
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 overflow-x-auto">
           <div class="flex items-center gap-2.5 mb-3">
             <span class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-sm">⚖️</span>
@@ -209,7 +208,7 @@
         </div>
       </div>
 
-      <!-- Joint / Household Category Table (Monthly, Fortnightly & Weekly all editable) -->
+      <!-- Joint / Household Category Table -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 overflow-x-auto">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <div class="flex items-center gap-2.5">
@@ -233,11 +232,11 @@
           <tfoot class="border-t-2 border-slate-700 font-bold bg-slate-800/50 text-white">
             <tr>
               <td class="py-3 px-2">Total Joint Budget</td>
-              <td id="hh-tot-mo" class="py-3 px-2 text-right">$7,151.25</td>
-              <td id="hh-tot-fn" class="py-3 px-2 text-right">$3,295.85</td>
-              <td id="hh-tot-wk" class="py-3 px-2 text-right">$1,647.92</td>
+              <td id="hh-tot-mo" class="py-3 px-2 text-right">$0.00</td>
+              <td id="hh-tot-fn" class="py-3 px-2 text-right">$0.00</td>
+              <td id="hh-tot-wk" class="py-3 px-2 text-right">$0.00</td>
               <td id="hh-tot-act" class="py-3 px-2 text-right">$0.00</td>
-              <td id="hh-tot-rem" class="py-3 px-2 text-right text-emerald-400">$7,151.25</td>
+              <td id="hh-tot-rem" class="py-3 px-2 text-right text-emerald-400">$0.00</td>
             </tr>
           </tfoot>
         </table>
@@ -246,7 +245,6 @@
 
     <!-- ==================== TAB 2: PERSONAL BUDGET ==================== -->
     <section id="tab-personal" class="hidden space-y-6">
-      <!-- Visual Personal Banner (No profile photo) -->
       <div class="relative h-24 rounded-2xl overflow-hidden border border-slate-800">
         <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1400&q=80" alt="Personal Wealth" class="w-full h-full object-cover opacity-30" />
         <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/85 to-transparent flex items-center justify-between px-6">
@@ -281,8 +279,8 @@
             <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Total Fortnightly Expenses</div>
             <span>📤</span>
           </div>
-          <div id="p-kpi-expenses" class="text-2xl font-bold text-white mt-2">$3,217.15</div>
-          <div id="p-kpi-expenses-sub" class="text-xs text-slate-400 mt-1.5">Fixed ($1,875.00) + Discretionary</div>
+          <div id="p-kpi-expenses" class="text-2xl font-bold text-white mt-2">$0.00</div>
+          <div id="p-kpi-expenses-sub" class="text-xs text-slate-400 mt-1.5">Fixed + Discretionary</div>
         </div>
 
         <div class="bg-emerald-950/30 border border-emerald-500/40 rounded-2xl p-4">
@@ -290,7 +288,7 @@
             <div class="text-[11px] font-semibold uppercase tracking-wider text-emerald-300">Fortnightly Surplus To Save</div>
             <span>🏦</span>
           </div>
-          <div id="p-kpi-fn-surplus" class="text-2xl font-bold text-emerald-400 mt-2">$182.85</div>
+          <div id="p-kpi-fn-surplus" class="text-2xl font-bold text-emerald-400 mt-2">$0.00</div>
           <div class="text-xs text-emerald-300/70 mt-1.5">Target surplus to savings</div>
         </div>
 
@@ -299,7 +297,7 @@
             <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Weekly Surplus Equivalent</div>
             <span>⏱️</span>
           </div>
-          <div id="p-kpi-wk-surplus" class="text-2xl font-bold text-indigo-400 mt-2">$91.42</div>
+          <div id="p-kpi-wk-surplus" class="text-2xl font-bold text-indigo-400 mt-2">$0.00</div>
           <div id="p-kpi-wk-sub" class="text-xs text-slate-400 mt-1.5">Equiv. Pay: $1,700.00</div>
         </div>
 
@@ -308,12 +306,12 @@
             <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Monthly Surplus Equivalent</div>
             <span>🗓️</span>
           </div>
-          <div id="p-kpi-mo-surplus" class="text-2xl font-bold text-blue-400 mt-2">$396.17</div>
+          <div id="p-kpi-mo-surplus" class="text-2xl font-bold text-blue-400 mt-2">$0.00</div>
           <div id="p-kpi-mo-sub" class="text-xs text-slate-400 mt-1.5">Equiv. Pay: $7,366.67</div>
         </div>
       </div>
 
-      <!-- Personal Budget Category Table (Monthly, Fortnightly & Weekly all editable) -->
+      <!-- Personal Budget Category Table -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 overflow-x-auto">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <div class="flex items-center gap-2.5">
@@ -337,11 +335,11 @@
           <tfoot class="border-t-2 border-slate-700 font-bold bg-slate-800/50 text-white">
             <tr>
               <td class="py-3 px-2">Total Personal Budget</td>
-              <td id="p-tot-mo" class="py-3 px-2 text-right">$6,970.50</td>
-              <td id="p-tot-fn" class="py-3 px-2 text-right">$3,217.15</td>
-              <td id="p-tot-wk" class="py-3 px-2 text-right">$1,608.58</td>
+              <td id="p-tot-mo" class="py-3 px-2 text-right">$0.00</td>
+              <td id="p-tot-fn" class="py-3 px-2 text-right">$0.00</td>
+              <td id="p-tot-wk" class="py-3 px-2 text-right">$0.00</td>
               <td id="p-tot-act" class="py-3 px-2 text-right">$0.00</td>
-              <td id="p-tot-rem" class="py-3 px-2 text-right text-emerald-400">$3,217.15</td>
+              <td id="p-tot-rem" class="py-3 px-2 text-right text-emerald-400">$0.00</td>
             </tr>
           </tfoot>
         </table>
@@ -371,11 +369,11 @@
                     <span>Spending Account</span>
                   </div>
                 </td>
-                <td id="acc-spend-mo" class="py-2.5 text-right">$1,513.00</td>
-                <td id="acc-spend-fn" class="py-2.5 text-right">$698.31</td>
-                <td id="acc-spend-wk" class="py-2.5 text-right">$349.15</td>
+                <td id="acc-spend-mo" class="py-2.5 text-right">$0.00</td>
+                <td id="acc-spend-fn" class="py-2.5 text-right">$0.00</td>
+                <td id="acc-spend-wk" class="py-2.5 text-right">$0.00</td>
                 <td id="acc-spend-act" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-spend-rem" class="py-2.5 text-right text-emerald-400">$698.31</td>
+                <td id="acc-spend-rem" class="py-2.5 text-right text-emerald-400">$0.00</td>
               </tr>
               <tr>
                 <td class="py-2.5 font-semibold text-white">
@@ -384,19 +382,19 @@
                     <span>Bills Account</span>
                   </div>
                 </td>
-                <td id="acc-bills-mo" class="py-2.5 text-right">$1,395.00</td>
-                <td id="acc-bills-fn" class="py-2.5 text-right">$643.85</td>
-                <td id="acc-bills-wk" class="py-2.5 text-right">$321.92</td>
+                <td id="acc-bills-mo" class="py-2.5 text-right">$0.00</td>
+                <td id="acc-bills-fn" class="py-2.5 text-right">$0.00</td>
+                <td id="acc-bills-wk" class="py-2.5 text-right">$0.00</td>
                 <td id="acc-bills-act" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-bills-rem" class="py-2.5 text-right text-emerald-400">$643.85</td>
+                <td id="acc-bills-rem" class="py-2.5 text-right text-emerald-400">$0.00</td>
               </tr>
               <tr class="font-bold bg-slate-800/40 text-white">
                 <td class="py-2.5">Total Personal (Excl. Joint)</td>
-                <td id="acc-tot-mo" class="py-2.5 text-right">$2,908.00</td>
-                <td id="acc-tot-fn" class="py-2.5 text-right">$1,342.15</td>
-                <td id="acc-tot-wk" class="py-2.5 text-right">$671.08</td>
+                <td id="acc-tot-mo" class="py-2.5 text-right">$0.00</td>
+                <td id="acc-tot-fn" class="py-2.5 text-right">$0.00</td>
+                <td id="acc-tot-wk" class="py-2.5 text-right">$0.00</td>
                 <td id="acc-tot-act" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-tot-rem" class="py-2.5 text-right text-emerald-400">$1,342.15</td>
+                <td id="acc-tot-rem" class="py-2.5 text-right text-emerald-400">$0.00</td>
               </tr>
             </tbody>
           </table>
@@ -418,26 +416,26 @@
               <tr>
                 <td class="py-2.5 font-semibold text-white">⏱️ Weekly</td>
                 <td id="freq-wk-pay" class="py-2.5 text-right">$1,700.00</td>
-                <td id="freq-wk-exp" class="py-2.5 text-right">$1,608.58</td>
-                <td id="freq-wk-sur" class="py-2.5 text-right font-semibold text-emerald-400">$91.42</td>
+                <td id="freq-wk-exp" class="py-2.5 text-right">$0.00</td>
+                <td id="freq-wk-sur" class="py-2.5 text-right font-semibold text-emerald-400">$0.00</td>
               </tr>
               <tr>
                 <td class="py-2.5 font-semibold text-white">📅 Fortnightly</td>
                 <td id="freq-fn-pay" class="py-2.5 text-right">$3,400.00</td>
-                <td id="freq-fn-exp" class="py-2.5 text-right">$3,217.15</td>
-                <td id="freq-fn-sur" class="py-2.5 text-right font-semibold text-emerald-400">$182.85</td>
+                <td id="freq-fn-exp" class="py-2.5 text-right">$0.00</td>
+                <td id="freq-fn-sur" class="py-2.5 text-right font-semibold text-emerald-400">$0.00</td>
               </tr>
               <tr>
                 <td class="py-2.5 font-semibold text-white">🗓️ Monthly</td>
                 <td id="freq-mo-pay" class="py-2.5 text-right">$7,366.67</td>
-                <td id="freq-mo-exp" class="py-2.5 text-right">$6,970.50</td>
-                <td id="freq-mo-sur" class="py-2.5 text-right font-semibold text-emerald-400">$396.17</td>
+                <td id="freq-mo-exp" class="py-2.5 text-right">$0.00</td>
+                <td id="freq-mo-sur" class="py-2.5 text-right font-semibold text-emerald-400">$0.00</td>
               </tr>
               <tr class="font-bold bg-slate-800/40 text-white">
                 <td class="py-2.5">🎯 Annual (26 Pays)</td>
                 <td id="freq-yr-pay" class="py-2.5 text-right">$88,400.00</td>
-                <td id="freq-yr-exp" class="py-2.5 text-right">$83,646.00</td>
-                <td id="freq-yr-sur" class="py-2.5 text-right text-emerald-400">$4,754.00</td>
+                <td id="freq-yr-exp" class="py-2.5 text-right">$0.00</td>
+                <td id="freq-yr-sur" class="py-2.5 text-right text-emerald-400">$0.00</td>
               </tr>
             </tbody>
           </table>
@@ -471,21 +469,21 @@
             </tr>
             <tr>
               <td class="py-2.5 text-slate-300">🛍️ Less: Personal Discretionary Spending</td>
-              <td id="p-rec-disc-bud" class="py-2.5 text-right">$1,342.15</td>
+              <td id="p-rec-disc-bud" class="py-2.5 text-right">$0.00</td>
               <td id="p-rec-disc-act" class="py-2.5 text-right">$0.00</td>
-              <td id="p-rec-disc-var" class="py-2.5 text-right">$1,342.15</td>
+              <td id="p-rec-disc-var" class="py-2.5 text-right">$0.00</td>
             </tr>
             <tr class="font-semibold">
               <td class="py-2.5 text-white">📤 Total Fortnightly Outflows</td>
-              <td id="p-rec-out-bud" class="py-2.5 text-right">$3,217.15</td>
+              <td id="p-rec-out-bud" class="py-2.5 text-right">$0.00</td>
               <td id="p-rec-out-act" class="py-2.5 text-right">$0.00</td>
-              <td id="p-rec-out-var" class="py-2.5 text-right">$3,217.15</td>
+              <td id="p-rec-out-var" class="py-2.5 text-right">$0.00</td>
             </tr>
             <tr class="font-bold bg-emerald-950/30 text-emerald-400">
               <td class="py-2.5">🏦 Net Surplus Available to Transfer to Savings</td>
-              <td id="p-rec-net-bud" class="py-2.5 text-right">$182.85</td>
+              <td id="p-rec-net-bud" class="py-2.5 text-right">$0.00</td>
               <td id="p-rec-net-act" class="py-2.5 text-right">$3,400.00</td>
-              <td id="p-rec-net-var" class="py-2.5 text-right">$3,217.15</td>
+              <td id="p-rec-net-var" class="py-2.5 text-right">$0.00</td>
             </tr>
           </tbody>
         </table>
@@ -578,31 +576,53 @@
   </div>
 
   <script>
-    // Joint / Household Categories with Symbols
+    // Exact Joint / Household Categories from Sheet
     const hhCategories = [
-      { id: 'hh-1', name: 'Mortgage / Rent', group: 'Housing', monthly: 3200.00, icon: '🏠' },
-      { id: 'hh-2', name: 'Groceries & Supermarkets', group: 'Essentials', monthly: 1400.00, icon: '🛒' },
-      { id: 'hh-3', name: 'Electricity, Gas & Water', group: 'Utilities', monthly: 520.00, icon: '⚡' },
-      { id: 'hh-4', name: 'Home & Contents Insurance', group: 'Protection', monthly: 380.00, icon: '🛡️' },
-      { id: 'hh-5', name: 'Council Rates & Levies', group: 'Property', monthly: 451.25, icon: '🏛️' },
-      { id: 'hh-6', name: 'High-Speed Internet & Streaming', group: 'Utilities', monthly: 160.00, icon: '📡' },
-      { id: 'hh-7', name: 'Home Maintenance & Garden', group: 'Upkeep', monthly: 440.00, icon: '🧰' },
-      { id: 'hh-8', name: 'Shared Dining & Household Fun', group: 'Lifestyle', monthly: 600.00, icon: '🍽️' }
+      { id: 'hh-1', name: 'Mortgage', group: 'Housing', monthly: 2450.00, icon: '🏠' },
+      { id: 'hh-2', name: 'Groceries', group: 'Essentials', monthly: 1275.00, icon: '🛒' },
+      { id: 'hh-3', name: 'Ollie Daycare', group: 'Family', monthly: 1205.00, icon: '👶' },
+      { id: 'hh-4', name: 'Power', group: 'Utilities', monthly: 450.00, icon: '⚡' },
+      { id: 'hh-5', name: 'Take Out', group: 'Lifestyle', monthly: 350.00, icon: '🍔' },
+      { id: 'hh-6', name: 'Cleaner', group: 'Upkeep', monthly: 305.00, icon: '🧹' },
+      { id: 'hh-7', name: 'House Insurance', group: 'Protection', monthly: 245.00, icon: '🛡️' },
+      { id: 'hh-8', name: 'Mum Repayment', group: 'Liabilities', monthly: 160.00, icon: '🤝' },
+      { id: 'hh-9', name: 'Lilly Food', group: 'Pets', monthly: 160.00, icon: '🐶' },
+      { id: 'hh-10', name: 'Petrol', group: 'Transport', monthly: 130.00, icon: '⛽' },
+      { id: 'hh-11', name: 'Internet', group: 'Utilities', monthly: 113.00, icon: '📡' },
+      { id: 'hh-12', name: 'Christmas Savings', group: 'Savings', monthly: 88.00, icon: '🎄' },
+      { id: 'hh-13', name: 'Contents Insurance', group: 'Protection', monthly: 76.00, icon: '📦' },
+      { id: 'hh-14', name: 'Lilly Insurance', group: 'Pets', monthly: 72.00, icon: '🐾' },
+      { id: 'hh-15', name: 'Rubbish', group: 'Utilities', monthly: 50.00, icon: '🗑️' },
+      { id: 'hh-16', name: 'RockGas Annual Fee', group: 'Utilities', monthly: 12.00, icon: '🔥' },
+      { id: 'hh-17', name: 'Emby', group: 'Subscriptions', monthly: 10.25, icon: '💻' }
     ];
 
-    // Personal Categories with Symbols & Account Types
+    // Exact Personal Categories from Sheet
     const pCategories = [
-      { id: 'p-1', name: 'Fixed Household Transfer', account: 'Joint', monthly: 4062.50, icon: '🏡' },
-      { id: 'p-2', name: 'Personal Dining, Coffee & Social', account: 'Spending', monthly: 650.00, icon: '☕' },
-      { id: 'p-3', name: 'Fuel & Public Transport', account: 'Spending', monthly: 420.00, icon: '⛽' },
-      { id: 'p-4', name: 'Clothing, Grooming & Hobby', account: 'Spending', monthly: 443.00, icon: '🛍️' },
-      { id: 'p-5', name: 'Health, Gym & Medical Insurance', account: 'Bills', monthly: 545.00, icon: '💪' },
+      { id: 'p-1', name: 'Joint Household Contribution', account: 'Joint', monthly: 4062.50, icon: '🏡' },
+      { id: 'p-2', name: 'Loan Repayments', account: 'Bills', monthly: 780.00, icon: '💳' },
+      { id: 'p-3', name: 'Personal Dining, Coffee & Social', account: 'Spending', monthly: 650.00, icon: '☕' },
+      { id: 'p-4', name: 'Health, Gym & Medical Insurance', account: 'Bills', monthly: 545.00, icon: '💪' },
+      { id: 'p-5', name: 'Petrol', account: 'Spending', monthly: 542.00, icon: '⛽' },
       { id: 'p-6', name: 'Car Rego, Servicing & Insurance', account: 'Bills', monthly: 520.00, icon: '🚗' },
-      { id: 'p-7', name: 'Mobile Phone & Personal Apps', account: 'Bills', monthly: 330.00, icon: '📱' }
+      { id: 'p-7', name: 'Clothing, Grooming & Hobby', account: 'Spending', monthly: 443.00, icon: '🛍️' },
+      { id: 'p-8', name: 'Smokes', account: 'Spending', monthly: 364.00, icon: '🚬' },
+      { id: 'p-9', name: 'Mobile Phone & Personal Apps', account: 'Bills', monthly: 240.00, icon: '📱' },
+      { id: 'p-10', name: 'Lunches', account: 'Spending', monthly: 260.00, icon: '🥪' },
+      { id: 'p-11', name: 'Parking', account: 'Spending', monthly: 130.00, icon: '🅿️' },
+      { id: 'p-12', name: 'Barber', account: 'Spending', monthly: 130.00, icon: '✂️' },
+      { id: 'p-13', name: 'Alcohol', account: 'Spending', monthly: 87.00, icon: '🍷' },
+      { id: 'p-14', name: 'Emby', account: 'Spending', monthly: 40.00, icon: '💻' }
     ];
 
     let hhExpenses = [];
-    let pExpenses = [];
+    let pExpenses = [
+      { id: 1, date: '2025-02-14', cat: 'Personal Dining, Coffee & Social', desc: 'Friday team lunch & coffee', amt: 24.50 },
+      { id: 2, date: '2025-02-16', cat: 'Mobile Phone & Personal Apps', desc: 'Spotify Family plan', amt: 18.99 },
+      { id: 3, date: '2025-02-18', cat: 'Personal Dining, Coffee & Social', desc: 'Morning flat white', amt: 6.50 },
+      { id: 4, date: '2025-02-20', cat: 'Clothing, Grooming & Hobby', desc: 'Weekend book purchase', amt: 35.00 },
+      { id: 5, date: '2025-02-22', cat: 'Clothing, Grooming & Hobby', desc: 'Electronics parts for DIY project', amt: 42.50 }
+    ];
 
     const fmt = (n) => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -620,7 +640,7 @@
       });
     }
 
-    // Render Joint / Household Table (Monthly, Fortnightly, Weekly all editable)
+    // Render Joint Household Table
     function renderHousehold() {
       const tbody = document.getElementById('hh-category-tbody');
       tbody.innerHTML = '';
@@ -682,7 +702,6 @@
       updateContributors(totFn);
     }
 
-    // Recalculate Household row from Monthly, Fortnightly, or Weekly input
     function updateHhCat(idx, period, val) {
       const num = parseFloat(val) || 0;
       if (period === 'mo') {
@@ -721,7 +740,7 @@
       document.getElementById('rec-mo-buffer').textContent = fmt(moBuffer);
     }
 
-    // Render Personal Table (Monthly, Fortnightly, Weekly all editable)
+    // Render Personal Table
     function renderPersonal() {
       const tbody = document.getElementById('p-category-tbody');
       tbody.innerHTML = '';
@@ -809,7 +828,6 @@
       updatePersonalPay(hhFnBud, hhFnAct, discFn, discAct);
     }
 
-    // Recalculate Personal row from Monthly, Fortnightly, or Weekly input
     function updatePCat(idx, period, val) {
       const num = parseFloat(val) || 0;
       if (period === 'mo') {
@@ -838,7 +856,6 @@
       const moSurplus = moPay - totMoExp;
       const yrSurplus = yrPay - totYrExp;
 
-      // Calculate Fixed vs Discretionary for Reconciliation
       const hhCat = pCategories.find(c => c.account === 'Joint');
       const hhFnBud = hhFnBudOverride !== undefined ? hhFnBudOverride : (hhCat ? (hhCat.monthly * 12) / 26 : 0);
       const hhFnAct = hhFnActOverride !== undefined ? hhFnActOverride : (hhCat ? pExpenses.filter(e => e.cat === hhCat.name).reduce((s, e) => s + e.amt, 0) : 0);
@@ -869,7 +886,7 @@
       document.getElementById('freq-yr-exp').textContent = fmt(totYrExp);
       document.getElementById('freq-yr-sur').textContent = fmt(yrSurplus);
 
-      // Update Fortnightly Reconciliation Table
+      // Reconciliation Table
       const totOutAct = hhFnAct + discFnAct;
       document.getElementById('p-rec-pay-bud').textContent = fmt(fnPay);
       document.getElementById('p-rec-pay-act').textContent = fmt(fnPay);
