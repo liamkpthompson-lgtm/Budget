@@ -26,28 +26,52 @@
             <button onclick="switchTab('dashboard')" id="btn-dashboard" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg text-sm shadow">Household Dashboard</button>
             <button onclick="switchTab('personal')" id="btn-personal" class="px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg text-sm border">Personal Budget & Pay</button>
             <button onclick="switchTab('expenses')" id="btn-expenses" class="px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg text-sm border">Expense Log</button>
-            <button onclick="switchTab('github')" id="btn-github" class="px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg text-sm border">Hosting Guide</button>
         </div>
 
         <!-- TAB 1: HOUSEHOLD DASHBOARD -->
         <div id="tab-dashboard" class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div class="bg-white p-5 rounded-xl shadow border">
-                    <p class="text-xs uppercase font-bold text-gray-400">Fortnightly Surplus</p>
-                    <h3 class="text-2xl font-extrabold text-emerald-600 mt-1">$3,295.85</h3>
+                    <p class="text-xs uppercase font-bold text-gray-400">Total Fortnight Budget</p>
+                    <h3 class="text-2xl font-extrabold text-indigo-600 mt-1" id="h-total-budget">$3,295.85</h3>
                 </div>
                 <div class="bg-white p-5 rounded-xl shadow border">
-                    <p class="text-xs uppercase font-bold text-gray-400">Total Fortnight Pool</p>
-                    <h3 class="text-2xl font-extrabold text-indigo-600 mt-1">$3,325.00</h3>
+                    <p class="text-xs uppercase font-bold text-gray-400">Total Income Pool</p>
+                    <h3 class="text-2xl font-extrabold text-emerald-600 mt-1" id="h-income-pool">$3,325.00</h3>
                 </div>
                 <div class="bg-white p-5 rounded-xl shadow border">
-                    <p class="text-xs uppercase font-bold text-gray-400">Buffer to Savings</p>
-                    <h3 class="text-2xl font-extrabold text-blue-600 mt-1">$29.15</h3>
+                    <p class="text-xs uppercase font-bold text-gray-400">Fortnightly Buffer</p>
+                    <h3 class="text-2xl font-extrabold text-blue-600 mt-1" id="h-buffer">$29.15</h3>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow border">
+                    <p class="text-xs uppercase font-bold text-gray-400">Monthly Surplus</p>
+                    <h3 class="text-2xl font-extrabold text-purple-600 mt-1" id="h-monthly-surplus">$63.17</h3>
+                </div>
+            </div>
+
+            <!-- Contributor Split Box -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-5 rounded-xl shadow border flex justify-between items-center">
+                    <div>
+                        <p class="text-xs uppercase font-bold text-gray-400">Liam (Baseline: $<span id="liam-base">1875</span>)</p>
+                        <h4 class="text-xl font-bold text-indigo-900 mt-1" id="liam-dynamic">$1,858.56 <span class="text-xs font-normal text-gray-500">(<span id="liam-pct">56.4</span>%)</span></h4>
+                    </div>
+                    <button onclick="editBaseline('liam')" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded font-semibold border">Edit Baseline</button>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow border flex justify-between items-center">
+                    <div>
+                        <p class="text-xs uppercase font-bold text-gray-400">Amy (Baseline: $<span id="amy-base">1450</span>)</p>
+                        <h4 class="text-xl font-bold text-indigo-900 mt-1" id="amy-dynamic">$1,437.29 <span class="text-xs font-normal text-gray-500">(<span id="amy-pct">43.6</span>%)</span></h4>
+                    </div>
+                    <button onclick="editBaseline('amy')" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded font-semibold border">Edit Baseline</button>
                 </div>
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow border overflow-x-auto">
-                <h3 class="text-lg font-bold mb-4">Household Joint Budget Categories</h3>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold">Household Joint Budget Categories (Click any value to edit)</h3>
+                    <button onclick="resetDashboardBudget()" class="text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded font-semibold">Reset Defaults</button>
+                </div>
                 <table class="w-full text-left border-collapse text-sm">
                     <thead>
                         <tr class="border-b text-xs text-gray-400 uppercase">
@@ -65,7 +89,6 @@
 
         <!-- TAB 2: PERSONAL BUDGET -->
         <div id="tab-personal" class="space-y-6 hidden">
-            <!-- Personal Dashboard Summary Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-white p-5 rounded-xl shadow border">
                     <p class="text-xs uppercase font-bold text-gray-400">Fortnightly Take-Home Pay (Editable)</p>
@@ -114,40 +137,8 @@
                         <div>
                             <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Category</label>
                             <select id="exp-cat" class="w-full p-2 border rounded text-sm bg-white">
-                                <optgroup label="🏠 Household Joint Budget">
-                                    <option value="Mortgage">Mortgage</option>
-                                    <option value="Groceries">Groceries</option>
-                                    <option value="Ollie Daycare">Ollie Daycare</option>
-                                    <option value="Power">Power</option>
-                                    <option value="Take Out">Take Out</option>
-                                    <option value="Cleaner">Cleaner</option>
-                                    <option value="House Insurance">House Insurance</option>
-                                    <option value="Mum Repayment">Mum Repayment</option>
-                                    <option value="Lilly Food">Lilly Food</option>
-                                    <option value="Petrol (Household)">Petrol (Household)</option>
-                                    <option value="Internet">Internet</option>
-                                    <option value="Christmas Savings">Christmas Savings</option>
-                                    <option value="Contents Insurance">Contents Insurance</option>
-                                    <option value="Lilly Insurance">Lilly Insurance</option>
-                                    <option value="Rubbish">Rubbish</option>
-                                    <option value="RockGas Annual Fee">RockGas Annual Fee</option>
-                                    <option value="Emby (Household)">Emby (Household)</option>
-                                </optgroup>
-                                <optgroup label="👤 Personal Budget & Accounts">
-                                    <option value="Spending Account">Spending Account</option>
-                                    <option value="Bills Account">Bills Account</option>
-                                    <option value="Joint Household Contribution">Joint Household Contribution</option>
-                                    <option value="Petrol (Personal)">Petrol (Personal)</option>
-                                    <option value="Smokes">Smokes</option>
-                                    <option value="Parking">Parking</option>
-                                    <option value="Lunches">Lunches</option>
-                                    <option value="Barber">Barber</option>
-                                    <option value="Alcohol">Alcohol</option>
-                                    <option value="Emby (Personal)">Emby (Personal)</option>
-                                    <option value="Loan Repayments">Loan Repayments</option>
-                                    <option value="Rates">Rates</option>
-                                    <option value="Mobile Phone">Mobile Phone</option>
-                                </optgroup>
+                                <optgroup label="🏠 Household Joint Budget" id="household-optgroup"></optgroup>
+                                <optgroup label="👤 Personal Budget & Accounts" id="personal-optgroup"></optgroup>
                             </select>
                         </div>
                         <div>
@@ -182,23 +173,10 @@
             </div>
         </div>
 
-        <!-- TAB 4: GITHUB GUIDE -->
-        <div id="tab-github" class="space-y-6 hidden">
-            <div class="bg-white p-6 rounded-xl shadow border space-y-4">
-                <h3 class="text-lg font-bold">GitHub Pages Hosting Checklist</h3>
-                <ol class="list-decimal list-inside space-y-2 text-sm text-gray-700">
-                    <li>Create a public repository on GitHub.</li>
-                    <li>Upload this exact file named <strong>index.html</strong> to the root folder.</li>
-                    <li>Go to repository <strong>Settings > Pages</strong>, set branch to <strong>main</strong> / root, and save.</li>
-                    <li>Wait 1 minute and your live app URL will be ready!</li>
-                </ol>
-            </div>
-        </div>
-
     </div>
 
     <script>
-        const dashboardData = [
+        const defaultDashboardData = [
             { cat: "Mortgage", m: 2450, f: 1130.77, w: 565.39, rem: 2450 },
             { cat: "Groceries", m: 1275, f: 588.46, w: 294.23, rem: 1275 },
             { cat: "Ollie Daycare", m: 1205, f: 556.15, w: 278.08, rem: 1205 },
@@ -237,7 +215,9 @@
 
         let currentMonth = "2026-10";
         let expenses = JSON.parse(localStorage.getItem('my_expenses') || '[]');
+        let dashboardData = JSON.parse(localStorage.getItem('my_dashboard_budget') || JSON.stringify(defaultDashboardData));
         let personalData = JSON.parse(localStorage.getItem('my_personal_budget') || JSON.stringify(defaultPersonalData));
+        let contributorBaselines = JSON.parse(localStorage.getItem('my_baselines') || JSON.stringify({ liam: 1875, amy: 1450 }));
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('exp-date').value = new Date().toISOString().split('T')[0];
@@ -255,7 +235,7 @@
         });
 
         function switchTab(tab) {
-            ['dashboard', 'personal', 'expenses', 'github'].forEach(t => {
+            ['dashboard', 'personal', 'expenses'].forEach(t => {
                 document.getElementById(`tab-${t}`).classList.add('hidden');
                 document.getElementById(`btn-${t}`).className = "px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg text-sm border";
             });
@@ -263,16 +243,64 @@
             document.getElementById(`btn-${tab}`).className = "px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg text-sm shadow";
         }
 
+        function populateCategoryDropdowns() {
+            const hGroup = document.getElementById('household-optgroup');
+            const pGroup = document.getElementById('personal-optgroup');
+            hGroup.innerHTML = '';
+            pGroup.innerHTML = '';
+
+            dashboardData.forEach(r => {
+                hGroup.innerHTML += `<option value="${r.cat}">${r.cat}</option>`;
+            });
+            personalData.forEach(r => {
+                if(!r.isIncome) {
+                    pGroup.innerHTML += `<option value="${r.cat}">${r.cat}</option>`;
+                }
+            });
+        }
+
         function renderTables() {
+            populateCategoryDropdowns();
+
+            // Render Dashboard Budget
             const dBody = document.getElementById('dashboard-tbody');
             dBody.innerHTML = '';
-            dashboardData.forEach(r => {
-                dBody.innerHTML += `<tr class="hover:bg-gray-50"><td class="py-2 px-3 font-medium">${r.cat}</td><td class="py-2 px-3">$${r.m.toFixed(2)}</td><td class="py-2 px-3">$${r.f.toFixed(2)}</td><td class="py-2 px-3">$${r.w.toFixed(2)}</td><td class="py-2 px-3 text-emerald-600 font-semibold">$${r.rem.toFixed(2)}</td></tr>`;
+            let totalDashboardF = 0;
+
+            dashboardData.forEach((r, idx) => {
+                totalDashboardF += r.f;
+                dBody.innerHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-2.5 px-3 font-medium">${r.cat}</td>
+                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editDashboardBudget(${idx}, 'm')" title="Click to edit">$${r.m.toFixed(2)}</td>
+                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editDashboardBudget(${idx}, 'f')" title="Click to edit">$${r.f.toFixed(2)}</td>
+                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editDashboardBudget(${idx}, 'w')" title="Click to edit">$${r.w.toFixed(2)}</td>
+                        <td class="py-2.5 px-3 text-emerald-600 font-semibold">$${r.rem.toFixed(2)}</td>
+                    </tr>`;
             });
 
+            // Calculate Contributors dynamic split
+            let totalPool = contributorBaselines.liam + contributorBaselines.amy;
+            let liamPct = (contributorBaselines.liam / totalPool) * 100;
+            let amyPct = (contributorBaselines.amy / totalPool) * 100;
+            let liamReq = totalDashboardF * (liamPct / 100);
+            let amyReq = totalDashboardF * (amyPct / 100);
+            let bufferF = totalPool - totalDashboardF;
+            let monthlySurplus = bufferF * 2.166;
+
+            document.getElementById('h-total-budget').textContent = `$${totalDashboardF.toFixed(2)}`;
+            document.getElementById('h-income-pool').textContent = `$${totalPool.toFixed(2)}`;
+            document.getElementById('h-buffer').textContent = `$${bufferF.toFixed(2)}`;
+            document.getElementById('h-monthly-surplus').textContent = `$${monthlySurplus.toFixed(2)}`;
+
+            document.getElementById('liam-base').textContent = contributorBaselines.liam;
+            document.getElementById('amy-base').textContent = contributorBaselines.amy;
+            document.getElementById('liam_dynamic').innerHTML = `$${liamReq.toFixed(2)} <span class="text-xs font-normal text-gray-500">(${liamPct.toFixed(1)}%)</span>`;
+            document.getElementById('amy_dynamic').innerHTML = `$${amyReq.toFixed(2)} <span class="text-xs font-normal text-gray-500">(${amyPct.toFixed(1)}%)</span>`;
+
+            // Render Personal Budget
             const pBody = document.getElementById('personal-tbody');
             pBody.innerHTML = '';
-            
             let totalIncomeF = 0;
             let totalOutflowF = 0;
 
@@ -286,9 +314,9 @@
                 pBody.innerHTML += `
                     <tr class="${rowStyle}">
                         <td class="py-2.5 px-3">${r.cat}</td>
-                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editBudget(${idx}, 'm')" title="Click to edit">$${r.m.toFixed(2)}</td>
-                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editBudget(${idx}, 'f')" title="Click to edit">$${r.f.toFixed(2)}</td>
-                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editBudget(${idx}, 'w')" title="Click to edit">$${r.w.toFixed(2)}</td>
+                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editPersonalBudget(${idx}, 'm')" title="Click to edit">$${r.m.toFixed(2)}</td>
+                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editPersonalBudget(${idx}, 'f')" title="Click to edit">$${r.f.toFixed(2)}</td>
+                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editPersonalBudget(${idx}, 'w')" title="Click to edit">$${r.w.toFixed(2)}</td>
                         <td class="py-2.5 px-3 text-emerald-600 font-semibold">$${r.rem.toFixed(2)}</td>
                     </tr>`;
             });
@@ -301,7 +329,33 @@
             renderExpenses();
         }
 
-        function editBudget(index, field) {
+        function editDashboardBudget(index, field) {
+            let item = dashboardData[index];
+            let currentVal = field === 'm' ? item.m : (field === 'f' ? item.f : item.w);
+            let newVal = prompt(`Edit ${field.toUpperCase()} amount for "${item.cat}":`, currentVal);
+            
+            if (newVal !== null && !isNaN(newVal) && newVal.trim() !== "") {
+                let val = parseFloat(newVal);
+                if (field === 'm') {
+                    item.m = val;
+                    item.f = val / 2.166;
+                    item.w = val / 4.333;
+                } else if (field === 'f') {
+                    item.f = val;
+                    item.m = val * 2.166;
+                    item.w = val / 2;
+                } else {
+                    item.w = val;
+                    item.f = val * 2;
+                    item.m = val * 4.333;
+                }
+                item.rem = item.f;
+                localStorage.setItem('my_dashboard_budget', JSON.stringify(dashboardData));
+                renderTables();
+            }
+        }
+
+        function editPersonalBudget(index, field) {
             let item = personalData[index];
             let currentVal = field === 'm' ? item.m : (field === 'f' ? item.f : item.w);
             let newVal = prompt(`Edit ${field.toUpperCase()} amount for "${item.cat}":`, currentVal);
@@ -310,7 +364,7 @@
                 let val = parseFloat(newVal);
                 if (field === 'm') {
                     item.m = val;
-                    item.f = val / 2.166; // approx fortnightly ratio
+                    item.f = val / 2.166;
                     item.w = val / 4.333;
                 } else if (field === 'f') {
                     item.f = val;
@@ -323,6 +377,26 @@
                 }
                 item.rem = item.f;
                 localStorage.setItem('my_personal_budget', JSON.stringify(personalData));
+                renderTables();
+            }
+        }
+
+        function editBaseline(person) {
+            let current = contributorBaselines[person];
+            let newVal = prompt(`Enter new baseline input for ${person}:`, current);
+            if (newVal !== null && !isNaN(newVal) && newVal.trim() !== "") {
+                contributorBaselines[person] = parseFloat(newVal);
+                localStorage.setItem('my_baselines', JSON.stringify(contributorBaselines));
+                renderTables();
+            }
+        }
+
+        function resetDashboardBudget() {
+            if (confirm("Reset household dashboard budget values to original defaults?")) {
+                localStorage.removeItem('my_dashboard_budget');
+                localStorage.removeItem('my_baselines');
+                dashboardData = JSON.parse(JSON.stringify(defaultDashboardData));
+                contributorBaselines = { liam: 1875, amy: 1450 };
                 renderTables();
             }
         }
