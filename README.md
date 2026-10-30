@@ -24,7 +24,7 @@
         <!-- Navigation Tabs -->
         <div class="flex gap-2 border-b border-gray-300 pb-2">
             <button onclick="switchTab('dashboard')" id="btn-dashboard" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg text-sm shadow">Household Dashboard</button>
-            <button onclick="switchTab('personal')" id="btn-personal" class="px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg text-sm border">Personal Budget</button>
+            <button onclick="switchTab('personal')" id="btn-personal" class="px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg text-sm border">Personal Budget & Pay</button>
             <button onclick="switchTab('expenses')" id="btn-expenses" class="px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg text-sm border">Expense Log</button>
             <button onclick="switchTab('github')" id="btn-github" class="px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg text-sm border">Hosting Guide</button>
         </div>
@@ -68,7 +68,7 @@
             <!-- Personal Dashboard Summary Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-white p-5 rounded-xl shadow border">
-                    <p class="text-xs uppercase font-bold text-gray-400">Fortnightly Take-Home Pay</p>
+                    <p class="text-xs uppercase font-bold text-gray-400">Fortnightly Take-Home Pay (Editable)</p>
                     <h3 class="text-2xl font-extrabold text-indigo-600 mt-1" id="p-income-card">$3,400.00</h3>
                 </div>
                 <div class="bg-white p-5 rounded-xl shadow border">
@@ -82,7 +82,10 @@
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow border overflow-x-auto">
-                <h3 class="text-lg font-bold mb-4">Personal Budget & Accounts</h3>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold">Personal Budget, Pay & Accounts (Click any value to edit)</h3>
+                    <button onclick="resetPersonalBudget()" class="text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded font-semibold">Reset Defaults</button>
+                </div>
                 <table class="w-full text-left border-collapse text-sm">
                     <thead>
                         <tr class="border-b text-xs text-gray-400 uppercase">
@@ -215,7 +218,7 @@
             { cat: "Emby", m: 10.25, f: 4.73, w: 2.37, rem: 10.25 }
         ];
 
-        const personalData = [
+        const defaultPersonalData = [
             { cat: "Fortnightly Take-Home Pay (Income)", m: 7366.67, f: 3400.00, w: 1700.00, rem: 3400.00, isIncome: true },
             { cat: "Spending Account", m: 1513, f: 698.31, w: 349.15, rem: 698.31 },
             { cat: "Bills Account", m: 1395, f: 643.85, w: 321.92, rem: 643.85 },
@@ -234,6 +237,7 @@
 
         let currentMonth = "2026-10";
         let expenses = JSON.parse(localStorage.getItem('my_expenses') || '[]');
+        let personalData = JSON.parse(localStorage.getItem('my_personal_budget') || JSON.stringify(defaultPersonalData));
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('exp-date').value = new Date().toISOString().split('T')[0];
@@ -269,15 +273,24 @@
             const pBody = document.getElementById('personal-tbody');
             pBody.innerHTML = '';
             
-            let totalIncomeF = 3400.00;
+            let totalIncomeF = 0;
             let totalOutflowF = 0;
 
-            personalData.forEach(r => {
-                if(!r.isIncome) {
+            personalData.forEach((r, idx) => {
+                if (r.isIncome) {
+                    totalIncomeF = r.f;
+                } else {
                     totalOutflowF += r.f;
                 }
-                const textCol = r.isIncome ? 'text-indigo-600 font-bold bg-indigo-50/50' : 'hover:bg-gray-50';
-                pBody.innerHTML += `<tr class="${textCol}"><td class="py-2 px-3 font-medium">${r.cat}</td><td class="py-2 px-3">$${r.m.toFixed(2)}</td><td class="py-2 px-3">$${r.f.toFixed(2)}</td><td class="py-2 px-3">$${r.w.toFixed(2)}</td><td class="py-2 px-3 text-emerald-600 font-semibold">$${r.rem.toFixed(2)}</td></tr>`;
+                const rowStyle = r.isIncome ? 'bg-indigo-50/60 font-bold text-indigo-900' : 'hover:bg-gray-50';
+                pBody.innerHTML += `
+                    <tr class="${rowStyle}">
+                        <td class="py-2.5 px-3">${r.cat}</td>
+                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editBudget(${idx}, 'm')" title="Click to edit">$${r.m.toFixed(2)}</td>
+                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editBudget(${idx}, 'f')" title="Click to edit">$${r.f.toFixed(2)}</td>
+                        <td class="py-2.5 px-3 cursor-pointer hover:bg-yellow-50" onclick="editBudget(${idx}, 'w')" title="Click to edit">$${r.w.toFixed(2)}</td>
+                        <td class="py-2.5 px-3 text-emerald-600 font-semibold">$${r.rem.toFixed(2)}</td>
+                    </tr>`;
             });
 
             let savingsSurplusF = totalIncomeF - totalOutflowF;
@@ -286,6 +299,40 @@
             document.getElementById('p-surplus-card').textContent = `$${savingsSurplusF.toFixed(2)}`;
 
             renderExpenses();
+        }
+
+        function editBudget(index, field) {
+            let item = personalData[index];
+            let currentVal = field === 'm' ? item.m : (field === 'f' ? item.f : item.w);
+            let newVal = prompt(`Edit ${field.toUpperCase()} amount for "${item.cat}":`, currentVal);
+            
+            if (newVal !== null && !isNaN(newVal) && newVal.trim() !== "") {
+                let val = parseFloat(newVal);
+                if (field === 'm') {
+                    item.m = val;
+                    item.f = val / 2.166; // approx fortnightly ratio
+                    item.w = val / 4.333;
+                } else if (field === 'f') {
+                    item.f = val;
+                    item.m = val * 2.166;
+                    item.w = val / 2;
+                } else {
+                    item.w = val;
+                    item.f = val * 2;
+                    item.m = val * 4.333;
+                }
+                item.rem = item.f;
+                localStorage.setItem('my_personal_budget', JSON.stringify(personalData));
+                renderTables();
+            }
+        }
+
+        function resetPersonalBudget() {
+            if (confirm("Reset personal budget values to original defaults?")) {
+                localStorage.removeItem('my_personal_budget');
+                personalData = JSON.parse(JSON.stringify(defaultPersonalData));
+                renderTables();
+            }
         }
 
         function addExpense(e) {
