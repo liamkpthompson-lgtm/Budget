@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Household Budget & Savings Tracker</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+<!-- Header -->
+<header class="bg-indigo-900 text-white shadow-md">
+<div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-indigo-700 p-2.5 rounded-xl shadow-inner">
+<i class="fa-solid fa-wallet text-2xl text-indigo-200"></i>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight">Household & Personal Budget Tracker</h1>
+<p class="text-xs text-indigo-300">Active Month: <span id="active-month-label" class="font-semibold text-white">2026-10</span></p>
+</div>
+</div>
+
+<!-- Month Selector & Controls -->
+<div class="flex items-center gap-3 bg-indigo-800/80 px-4 py-2 rounded-xl border border-indigo-700">
+<label for="month-selector" class="text-xs uppercase font-bold text-indigo-200">Month:</label>
+<input type="month" id="month-selector" class="bg-indigo-950 text-white text-sm px-3 py-1 rounded-lg border border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400" value="2026-10">
+<button onclick="rolloverMonth()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow">
+<i class="fa-solid fa-rotate mr-1"></i> New Month Roll-over
+</button>
+</div>
+</div>
+
+<!-- Navigation Tabs -->
+<nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto space-x-2 border-t border-indigo-800/60 pt-2">
+<button onclick="switchTab('dashboard')" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg transition border-b-2 border-indigo-400 text-white bg-indigo-800/50" data-target="dashboard">
+<i class="fa-solid fa-house-chimney mr-2"></i> Household Dashboard
+</button>
+<button onclick="switchTab('personal')" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg transition text-indigo-300 hover:text-white hover:bg-indigo-800/30" data-target="personal">
+<i class="fa-solid fa-user mr-2"></i> Personal Budget
+</button>
+<button onclick="switchTab('expenses')" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg transition text-indigo-300 hover:text-white hover:bg-indigo-800/30" data-target="expenses">
+<i class="fa-solid fa-receipt mr-2"></i> Expense Log
+</button>
+<button onclick="switchTab('github')" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg transition text-indigo-300 hover:text-white hover:bg-indigo-800/30" data-target="github">
+<i class="fa-brands fa-github mr-2"></i> GitHub Hosting Guide
+</button>
+</nav>
+</header>
+
+<!-- Main Container -->
+<main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full">
+
+<!-- TAB 1: HOUSEHOLD DASHBOARD -->
+<section id="tab-dashboard" class="tab-content space-y-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+<div>
+<p class="text-xs uppercase font-bold text-slate-400">Fortnightly Surplus</p>
+<h3 class="text-2xl font-extrabold text-emerald-600 mt-1">1,647.92</h3>
+<p class="text-xs text-slate-500 mt-0.5">Equivalent per week</p>
+</div>
+<div class="bg-emerald-50 text-emerald-600 p-3 rounded-xl"><i class="fa-solid fa-chart-line text-xl"></i></div>
+</div>
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+<div>
+<p class="text-xs uppercase font-bold text-slate-400">Total Fortnight Pool</p>
+<h3 class="text-2xl font-extrabold text-indigo-600 mt-1">29.15</h3>
+<p class="text-xs text-slate-500 mt-0.5">Fortnightly difference</p>
+</div>
+<div class="bg-blue-50 text-blue-600 p-3 rounded-xl"><i class="fa-solid fa-shield-halved text-xl"></i></div>
+</div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 lg:col-span-1">
+<h3 class="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+<i class="fa-solid fa-users text-indigo-600"></i> Contributor Split
+</h3>
+<div class="space-y-4">
+<div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center">
+<div>
+<h4 class="font-semibold text-slate-800">Liam</h4>
+<p class="text-xs text-slate-500">Baseline: 1,858.56 <span class="text-xs font-normal text-slate-400">req.</span></span>
+</div>
+<div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center">
+<div>
+<h4 class="font-semibold text-slate-800">Amy</h4>
+<p class="text-xs text-slate-500">Baseline: 1,437.29 <span class="text-xs font-normal text-slate-400">req.</span></span>
+</div>
+</div>
+</div>
+
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 lg:col-span-2 overflow-x-auto">
+<h3 class="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+<i class="fa-solid fa-list-check text-indigo-600"></i> Household Joint Budget Categories
+</h3>
+<table class="w-full text-left border-collapse text-sm">
+<thead>
+<tr class="border-b border-slate-200 text-xs text-slate-400 uppercase font-bold">
+<th class="py-2.5 px-3">Category</th>
+<th class="py-2.5 px-3">Monthly</th>
+<th class="py-2.5 px-3">Fortnightly</th>
+<th class="py-2.5 px-3">Weekly</th>
+<th class="py-2.5 px-3">Actual Spend</th>
+<th class="py-2.5 px-3">Remaining</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-slate-700" id="dashboard-budget-tbody"></tbody>
+</table>
+</div>
+</div>
+</section>
+
+<!-- TAB 2: PERSONAL BUDGET -->
+<section id="tab-personal" class="tab-content hidden space-y-6">
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 overflow-x-auto">
+<h3 class="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+<i class="fa-solid fa-user-gear text-indigo-600"></i> Personal Budget & Accounts Breakdown
+</h3>
+<table class="w-full text-left border-collapse text-sm">
+<thead>
+<tr class="border-b border-slate-200 text-xs text-slate-400 uppercase font-bold">
+<th class="py-2.5 px-3">Category / Account</th>
+<th class="py-2.5 px-3">Monthly Budget</th>
+<th class="py-2.5 px-3">Fortnightly Budget</th>
+<th class="py-2.5 px-3">Weekly Budget</th>
+<th class="py-2.5 px-3">Actual Spend</th>
+<th class="py-2.5 px-3">Surplus / Remaining</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-slate-700" id="personal-budget-tbody"></tbody>
+</table>
+</div>
+</section>
+
+<!-- TAB 3: EXPENSE LOGS -->
+<section id="tab-expenses" class="tab-content hidden space-y-6">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 lg:col-span-1 h-fit">
+<h3 class="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+<i class="fa-solid fa-plus-circle text-indigo-600"></i> Log New Expense
+</h3>
+<form id="expense-form" onsubmit="addExpense(event)" class="space-y-4">
+<div>
+<label class="block text-xs font-bold uppercase text-slate-500 mb-1">Date</label>
+<input type="date" id="expense-date" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<div>
+<label class="block text-xs font-bold uppercase text-slate-500 mb-1">Category</label>
+<select id="expense-category" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+<option value="Coffee & Lunches">Coffee & Lunches</option>
+<option value="Groceries">Groceries</option>
+<option value="Petrol">Petrol</option>
+<option value="Subscriptions & Software">Subscriptions & Software</
