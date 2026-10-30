@@ -29,7 +29,7 @@
             <button onclick="switchTab('github')" id="btn-github" class="px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg text-sm border">Hosting Guide</button>
         </div>
 
-        <!-- TAB 1: DASHBOARD -->
+        <!-- TAB 1: HOUSEHOLD DASHBOARD -->
         <div id="tab-dashboard" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-white p-5 rounded-xl shadow border">
@@ -65,6 +65,22 @@
 
         <!-- TAB 2: PERSONAL BUDGET -->
         <div id="tab-personal" class="space-y-6 hidden">
+            <!-- Personal Dashboard Summary Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-5 rounded-xl shadow border">
+                    <p class="text-xs uppercase font-bold text-gray-400">Fortnightly Take-Home Pay</p>
+                    <h3 class="text-2xl font-extrabold text-indigo-600 mt-1" id="p-income-card">$3,400.00</h3>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow border">
+                    <p class="text-xs uppercase font-bold text-gray-400">Total Fortnightly Outflows</p>
+                    <h3 class="text-2xl font-extrabold text-rose-600 mt-1" id="p-outflow-card">$3,217.15</h3>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow border">
+                    <p class="text-xs uppercase font-bold text-gray-400">Fortnightly Surplus to Save</p>
+                    <h3 class="text-2xl font-extrabold text-emerald-600 mt-1" id="p-surplus-card">$182.85</h3>
+                </div>
+            </div>
+
             <div class="bg-white p-6 rounded-xl shadow border overflow-x-auto">
                 <h3 class="text-lg font-bold mb-4">Personal Budget & Accounts</h3>
                 <table class="w-full text-left border-collapse text-sm">
@@ -200,6 +216,7 @@
         ];
 
         const personalData = [
+            { cat: "Fortnightly Take-Home Pay (Income)", m: 7366.67, f: 3400.00, w: 1700.00, rem: 3400.00, isIncome: true },
             { cat: "Spending Account", m: 1513, f: 698.31, w: 349.15, rem: 698.31 },
             { cat: "Bills Account", m: 1395, f: 643.85, w: 321.92, rem: 643.85 },
             { cat: "Joint Household Contribution", m: 4062.50, f: 1875.00, w: 937.50, rem: 1875.00 },
@@ -251,9 +268,22 @@
 
             const pBody = document.getElementById('personal-tbody');
             pBody.innerHTML = '';
+            
+            let totalIncomeF = 3400.00;
+            let totalOutflowF = 0;
+
             personalData.forEach(r => {
-                pBody.innerHTML += `<tr class="hover:bg-gray-50"><td class="py-2 px-3 font-medium">${r.cat}</td><td class="py-2 px-3">$${r.m.toFixed(2)}</td><td class="py-2 px-3">$${r.f.toFixed(2)}</td><td class="py-2 px-3">$${r.w.toFixed(2)}</td><td class="py-2 px-3 text-emerald-600 font-semibold">$${r.rem.toFixed(2)}</td></tr>`;
+                if(!r.isIncome) {
+                    totalOutflowF += r.f;
+                }
+                const textCol = r.isIncome ? 'text-indigo-600 font-bold bg-indigo-50/50' : 'hover:bg-gray-50';
+                pBody.innerHTML += `<tr class="${textCol}"><td class="py-2 px-3 font-medium">${r.cat}</td><td class="py-2 px-3">$${r.m.toFixed(2)}</td><td class="py-2 px-3">$${r.f.toFixed(2)}</td><td class="py-2 px-3">$${r.w.toFixed(2)}</td><td class="py-2 px-3 text-emerald-600 font-semibold">$${r.rem.toFixed(2)}</td></tr>`;
             });
+
+            let savingsSurplusF = totalIncomeF - totalOutflowF;
+            document.getElementById('p-income-card').textContent = `$${totalIncomeF.toFixed(2)}`;
+            document.getElementById('p-outflow-card').textContent = `$${totalOutflowF.toFixed(2)}`;
+            document.getElementById('p-surplus-card').textContent = `$${savingsSurplusF.toFixed(2)}`;
 
             renderExpenses();
         }
