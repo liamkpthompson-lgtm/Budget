@@ -32,7 +32,7 @@
 
   <div class="max-w-7xl mx-auto space-y-6">
 
-    <!-- Top Visual Hero Banner -->
+    <!-- Top Visual Hero Banner & Global Month Selector -->
     <header class="relative rounded-3xl overflow-hidden border border-slate-800 shadow-2xl">
       <img
         src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80"
@@ -62,11 +62,8 @@
         </div>
 
         <div class="flex items-center gap-3 bg-slate-900/90 backdrop-blur-md border border-slate-800 px-4 py-2.5 rounded-2xl self-start sm:self-auto">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-          <div class="text-xs">
-            <div class="font-bold text-white text-sm">Liam &amp; Amy</div>
-            <div class="text-emerald-400 font-medium">Active Fortnight</div>
-          </div>
+          <span class="text-xs font-semibold text-slate-400">📅 Active Month:</span>
+          <input id="global-month-selector" type="month" onchange="changeGlobalMonth(this.value)" class="bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1 text-xs font-bold text-white focus:outline-none focus:border-blue-500" />
         </div>
       </div>
     </header>
@@ -641,6 +638,10 @@
       { id: 'p-14', name: 'Emby', account: 'Spending', monthly: 40.00, icon: '💻' }
     ];
 
+    // Global Selected Month (defaults to current YYYY-MM)
+    let currentMonth = localStorage.getItem('selected_month') || new Date().toISOString().slice(0, 7);
+    document.getElementById('global-month-selector').value = currentMonth;
+
     // Load from localStorage or defaults
     let hhCategories = JSON.parse(localStorage.getItem('hh_categories')) || defaultHhCategories;
     let pCategories = JSON.parse(localStorage.getItem('p_categories')) || defaultPCategories;
@@ -660,8 +661,8 @@
     document.getElementById('liam-baseline').value = liamBaseline.toFixed(2);
     document.getElementById('amy-baseline').value = amyBaseline.toFixed(2);
     document.getElementById('p-pay-input').value = personalPay.toFixed(2);
-    document.getElementById('hh-log-date').value = new Date().toISOString().slice(0, 10);
-    document.getElementById('p-log-date').value = new Date().toISOString().slice(0, 10);
+    document.getElementById('hh-log-date').value = currentMonth + '-01';
+    document.getElementById('p-log-date').value = currentMonth + '-01';
 
     function saveData() {
       localStorage.setItem('hh_categories', JSON.stringify(hhCategories));
@@ -671,6 +672,19 @@
       localStorage.setItem('liam_baseline', document.getElementById('liam-baseline').value);
       localStorage.setItem('amy_baseline', document.getElementById('amy-baseline').value);
       localStorage.setItem('personal_pay', document.getElementById('p-pay-input').value);
+      localStorage.setItem('selected_month', currentMonth);
+    }
+
+    function changeGlobalMonth(val) {
+      if (!val) return;
+      currentMonth = val;
+      document.getElementById('hh-log-date').value = currentMonth + '-01';
+      document.getElementById('p-log-date').value = currentMonth + '-01';
+      renderHousehold();
+      renderPersonal();
+      renderExpenseLogs('hh');
+      renderExpenseLogs('p');
+      saveData();
     }
 
     const fmt = (n) => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -695,12 +709,14 @@
       tbody.innerHTML = '';
 
       let totMo = 0, totFn = 0, totWk = 0, totAct = 0;
+      // Filter expenses matching current selected month (YYYY-MM)
+      const filteredHhExp = hhExpenses.filter(e => e.date && e.date.startsWith(currentMonth));
 
       hhCategories.forEach((cat, idx) => {
         const mo = cat.monthly;
         const fn = (mo * 12) / 26;
         const wk = (mo * 12) / 52;
-        const actual = hhExpenses.filter(e => e.cat === cat.name).reduce((s, e) => s + e.amt, 0);
+        const actual = filteredHhExp.filter(e => e.cat === cat.name).reduce((s, e) => s + e.amt, 0);
         const rem = mo - actual;
 
         totMo += mo;
@@ -851,11 +867,13 @@
       let billsMo = 0, billsFn = 0, billsWk = 0, billsAct = 0;
       let hhFnBud = 0, hhFnAct = 0;
 
+      const filteredPExp = pExpenses.filter(e => e.date && e.date.startsWith(currentMonth));
+
       pCategories.forEach((cat, idx) => {
         const mo = cat.monthly;
         const fn = (mo * 12) / 26;
         const wk = (mo * 12) / 52;
-        const actual = pExpenses.filter(e => e.cat === cat.name).reduce((s, e) => s + e.amt, 0);
+        const actual = filteredPExp.filter(e => e.cat === cat.name).reduce((s, e) => s + e.amt, 0);
         const rem = fn - actual;
 
         totMo += mo;
@@ -963,9 +981,10 @@
 
       const hhCat = pCategories.find(c => c.account === 'Joint');
       const hhFnBud = hhFnBudOverride !== undefined ? hhFnBudOverride : (hhCat ? (hhCat.monthly * 12) / 26 : 0);
-      const hhFnAct = hhFnActOverride !== undefined ? hhFnActOverride : (hhCat ? pExpenses.filter(e => e.cat === hhCat.name).reduce((s, e) => s + e.amt, 0) : 0);
+      const filteredPExp = pExpenses.filter(e => e.date && e.date.startsWith(currentMonth));
+      const hhFnAct = hhFnActOverride !== undefined ? hhFnActOverride : (hhCat ? filteredPExp.filter(e => e.cat === hhCat.name).reduce((s, e) => s + e.amt, 0) : 0);
       const discFnBud = discFnOverride !== undefined ? discFnOverride : (totFnExp - hhFnBud);
-      const discFnAct = discActOverride !== undefined ? discActOverride : (pExpenses.reduce((s, e) => s + e.amt, 0) - hhFnAct);
+      const discFnAct = discActOverride !== undefined ? discActOverride : (filteredPExp.reduce((s, e) => s + e.amt, 0) - hhFnAct);
 
       document.getElementById('p-kpi-expenses').textContent = fmt(totFnExp);
       document.getElementById('p-kpi-expenses-sub').textContent = `Fixed (${fmt(hhFnBud)}) + Discretionary`;
@@ -1020,7 +1039,7 @@
 
     function addExpense(type) {
       const prefix = type === 'hh' ? 'hh-log' : 'p-log';
-      const date = document.getElementById(prefix + '-date').value || new Date().toISOString().slice(0, 10);
+      const date = document.getElementById(prefix + '-date').value || (currentMonth + '-01');
       const cat = document.getElementById(prefix + '-cat').value;
       const desc = document.getElementById(prefix + '-desc').value || 'Logged transaction';
       const amt = parseFloat(document.getElementById(prefix + '-amt').value) || 0;
@@ -1054,7 +1073,9 @@
     }
 
     function renderExpenseLogs(type) {
-      const list = type === 'hh' ? hhExpenses : pExpenses;
+      const rawList = type === 'hh' ? hhExpenses : pExpenses;
+      // Filter logs by the selected global month
+      const list = rawList.filter(e => e.date && e.date.startsWith(currentMonth));
       const tbody = document.getElementById(type === 'hh' ? 'hh-log-tbody' : 'p-log-tbody');
 
       if (list.length === 0) {
@@ -1063,7 +1084,7 @@
             <td colspan="5" class="py-8 text-center text-slate-500 bg-slate-900">
               <div class="flex flex-col items-center gap-2">
                 <span class="text-2xl">🧾</span>
-                <span>No transactions logged yet. Add an expense above to see it here.</span>
+                <span>No transactions logged for ${currentMonth}. Add an expense above to see it here.</span>
               </div>
             </td>
           </tr>
@@ -1085,7 +1106,7 @@
       }
 
       if (type === 'p') {
-        const total = pExpenses.reduce((s, e) => s + e.amt, 0);
+        const total = list.reduce((s, e) => s + e.amt, 0);
         document.getElementById('p-log-total').textContent = fmt(total);
       }
     }
