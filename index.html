@@ -53,7 +53,7 @@
           </div>
           <div>
             <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-0.5 rounded-full">
-              Financial Hub (Cloud Synced)
+              Financial Hub (Cloud Synced Only)
             </span>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
               Liam &amp; Amy Budget Portal
@@ -603,7 +603,7 @@
 
   <script>
     /* ==========================================================
-       FIREBASE CONFIGURATION FOR REAL-TIME SYNC ACROSS DEVICES
+       FIREBASE CONFIGURATION (CLOUD-ONLY SYNC)
        ========================================================== */
     const firebaseConfig = {
       apiKey: "AIzaSyDesOiq9NktGlfThDbj6BfC6z_wv9oj_zo",
@@ -615,18 +615,8 @@
       appId: "1:37111521837:web:aa10bae07ee25d17de8ea4"
     };
 
-    let useFirebase = false;
-    let db = null;
-
-    if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY") {
-      try {
-        firebase.initializeApp(firebaseConfig);
-        db = firebase.database();
-        useFirebase = true;
-      } catch (e) {
-        console.warn("Firebase init failed, falling back to localStorage", e);
-      }
-    }
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
     // Default Joint / Household Categories
     const defaultHhCategories = [
@@ -667,20 +657,16 @@
       { id: 'p-14', name: 'Emby', account: 'Spending', monthly: 40.00, icon: '💻' }
     ];
 
-    let currentMonth = localStorage.getItem('selected_month') || new Date().toISOString().slice(0, 7);
+    let currentMonth = new Date().toISOString().slice(0, 7);
+    let hhCategories = defaultHhCategories;
+    let pCategories = defaultPCategories;
+    let hhExpenses = [];
+    let pExpenses = [];
+    let liamBaseline = 1875.00;
+    let amyBaseline = 1450.00;
+    let personalPay = 3400.00;
+
     document.getElementById('global-month-selector').value = currentMonth;
-
-    let hhCategories = JSON.parse(localStorage.getItem('hh_categories')) || defaultHhCategories;
-    let pCategories = JSON.parse(localStorage.getItem('p_categories')) || defaultPCategories;
-    let hhExpenses = JSON.parse(localStorage.getItem('hh_expenses')) || [];
-    let pExpenses = JSON.parse(localStorage.getItem('p_expenses')) || [];
-    let liamBaseline = localStorage.getItem('liam_baseline') ? parseFloat(localStorage.getItem('liam_baseline')) : 1875.00;
-    let amyBaseline = localStorage.getItem('amy_baseline') ? parseFloat(localStorage.getItem('amy_baseline')) : 1450.00;
-    let personalPay = localStorage.getItem('personal_pay') ? parseFloat(localStorage.getItem('personal_pay')) : 3400.00;
-
-    document.getElementById('liam-baseline').value = liamBaseline.toFixed(2);
-    document.getElementById('amy-baseline').value = amyBaseline.toFixed(2);
-    document.getElementById('p-pay-input').value = personalPay.toFixed(2);
     document.getElementById('hh-log-date').value = currentMonth + '-01';
     document.getElementById('p-log-date').value = currentMonth + '-01';
 
@@ -696,56 +682,45 @@
         selected_month: currentMonth
       };
 
-      // Always update local cache as a reliable fallback
-      localStorage.setItem('hh_categories', JSON.stringify(hhCategories));
-      localStorage.setItem('p_categories', JSON.stringify(pCategories));
-      localStorage.setItem('hh_expenses', JSON.stringify(hhExpenses));
-      localStorage.setItem('p_expenses', JSON.stringify(pExpenses));
-      localStorage.setItem('liam_baseline', document.getElementById('liam-baseline').value);
-      localStorage.setItem('amy_baseline', document.getElementById('amy-baseline').value);
-      localStorage.setItem('personal_pay', document.getElementById('p-pay-input').value);
-      localStorage.setItem('selected_month', currentMonth);
-
-      // Push complete state to Firebase Cloud Realtime Database
-      if (useFirebase && db) {
-        db.ref('budget_data').set(data).catch((err) => {
-          console.error("Cloud sync save error:", err);
-        });
-      }
-    }
-
-    if (useFirebase && db) {
-      db.ref('budget_data').on('value', (snapshot) => {
-        const val = snapshot.val();
-        if (val) {
-          if (val.hh_categories) hhCategories = val.hh_categories;
-          if (val.p_categories) pCategories = val.p_categories;
-          if (val.hh_expenses) hhExpenses = val.hh_expenses;
-          if (val.p_expenses) pExpenses = val.p_expenses;
-          if (val.liam_baseline) {
-            liamBaseline = parseFloat(val.liam_baseline);
-            document.getElementById('liam-baseline').value = liamBaseline.toFixed(2);
-          }
-          if (val.amy_baseline) {
-            amyBaseline = parseFloat(val.amy_baseline);
-            document.getElementById('amy-baseline').value = amyBaseline.toFixed(2);
-          }
-          if (val.personal_pay) {
-            personalPay = parseFloat(val.personal_pay);
-            document.getElementById('p-pay-input').value = personalPay.toFixed(2);
-          }
-          if (val.selected_month) {
-            currentMonth = val.selected_month;
-            document.getElementById('global-month-selector').value = currentMonth;
-          }
-          populateDropdowns();
-          renderHousehold();
-          renderPersonal();
-          renderExpenseLogs('hh');
-          renderExpenseLogs('p');
-        }
+      db.ref('budget_data').set(data).catch((err) => {
+        console.error("Cloud sync save error:", err);
       });
     }
+
+    // Real-time listener: loads and updates state directly from Firebase
+    db.ref('budget_data').on('value', (snapshot) => {
+      const val = snapshot.val();
+      if (val) {
+        if (val.hh_categories) hhCategories = val.hh_categories;
+        if (val.p_categories) pCategories = val.p_categories;
+        if (val.hh_expenses) hhExpenses = val.hh_expenses;
+        if (val.p_expenses) pExpenses = val.p_expenses;
+        if (val.liam_baseline) {
+          liamBaseline = parseFloat(val.liam_baseline);
+          document.getElementById('liam-baseline').value = liamBaseline.toFixed(2);
+        }
+        if (val.amy_baseline) {
+          amyBaseline = parseFloat(val.amy_baseline);
+          document.getElementById('amy-baseline').value = amyBaseline.toFixed(2);
+        }
+        if (val.personal_pay) {
+          personalPay = parseFloat(val.personal_pay);
+          document.getElementById('p-pay-input').value = personalPay.toFixed(2);
+        }
+        if (val.selected_month) {
+          currentMonth = val.selected_month;
+          document.getElementById('global-month-selector').value = currentMonth;
+        }
+      } else {
+        // If database is empty, push default state once
+        saveData();
+      }
+      populateDropdowns();
+      renderHousehold();
+      renderPersonal();
+      renderExpenseLogs('hh');
+      renderExpenseLogs('p');
+    });
 
     function changeGlobalMonth(val) {
       if (!val) return;
@@ -840,7 +815,6 @@
       document.getElementById('hh-kpi-weekly').textContent = fmt(totWk);
 
       updateContributors(totFn);
-      saveData();
     }
 
     function updateHhCat(idx, period, val) {
@@ -853,6 +827,7 @@
         hhCategories[idx].monthly = (num * 52) / 12;
       }
       renderHousehold();
+      saveData();
     }
 
     function addCategory(type) {
@@ -955,7 +930,6 @@
       document.getElementById('rec-req').textContent = fmt(fnReq);
       document.getElementById('rec-fn-buffer').textContent = fmt(fnBuffer);
       document.getElementById('rec-mo-buffer').textContent = fmt(moBuffer);
-      saveData();
     }
 
     // Render Personal Table
@@ -1050,7 +1024,6 @@
       document.getElementById('acc-tot-rem').textContent = fmt(discFn - discAct);
 
       updatePersonalPay(hhFnBud, hhFnAct, discFn, discAct);
-      saveData();
     }
 
     function updatePCat(idx, period, val) {
@@ -1063,6 +1036,7 @@
         pCategories[idx].monthly = (num * 52) / 12;
       }
       renderPersonal();
+      saveData();
     }
 
     function updatePersonalPay(hhFnBudOverride, hhFnActOverride, discFnOverride, discActOverride) {
@@ -1128,7 +1102,6 @@
       document.getElementById('p-rec-net-bud').textContent = fmt(fnSurplus);
       document.getElementById('p-rec-net-act').textContent = fmt(fnPay - totOutAct);
       document.getElementById('p-rec-net-var').textContent = fmt((fnPay - totOutAct) - fnSurplus);
-      saveData();
     }
 
     function populateDropdowns() {
@@ -1211,13 +1184,6 @@
         document.getElementById('p-log-total').textContent = fmt(total);
       }
     }
-
-    // Initialize App
-    populateDropdowns();
-    renderHousehold();
-    renderPersonal();
-    renderExpenseLogs('hh');
-    renderExpenseLogs('p');
   </script>
 </body>
 </html>
