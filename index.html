@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Household & Personal Budget Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Firebase App SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
   <style>
     body {
       background-color: #020617;
@@ -50,7 +53,7 @@
           </div>
           <div>
             <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-0.5 rounded-full">
-              Financial Hub
+              Financial Hub (Cloud Synced)
             </span>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
               Liam &amp; Amy Budget Portal
@@ -599,6 +602,32 @@
   </div>
 
   <script>
+    /* ==========================================================
+       FIREBASE CONFIGURATION FOR REAL-TIME SYNC ACROSS DEVICES
+       ========================================================== */
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "budget-portal-d880c.firebaseapp.com",
+      databaseURL: "https://budget-portal-d880c-default-rtdb.firebaseio.com/",
+      projectId: "budget-portal-d880c",
+      storageBucket: "budget-portal-d880c.firebasestorage.app",
+      messagingSenderId: "37111521837",
+      appId: "YOUR_APP_ID"
+    };
+
+    let useFirebase = false;
+    let db = null;
+
+    if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY") {
+      try {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.database();
+        useFirebase = true;
+      } catch (e) {
+        console.warn("Firebase init failed, falling back to localStorage", e);
+      }
+    }
+
     // Default Joint / Household Categories
     const defaultHhCategories = [
       { id: 'hh-1', name: 'Mortgage', group: 'Housing', monthly: 2450.00, icon: '🏠' },
@@ -638,26 +667,17 @@
       { id: 'p-14', name: 'Emby', account: 'Spending', monthly: 40.00, icon: '💻' }
     ];
 
-    // Global Selected Month (defaults to current YYYY-MM)
     let currentMonth = localStorage.getItem('selected_month') || new Date().toISOString().slice(0, 7);
     document.getElementById('global-month-selector').value = currentMonth;
 
-    // Load from localStorage or defaults
     let hhCategories = JSON.parse(localStorage.getItem('hh_categories')) || defaultHhCategories;
     let pCategories = JSON.parse(localStorage.getItem('p_categories')) || defaultPCategories;
     let hhExpenses = JSON.parse(localStorage.getItem('hh_expenses')) || [];
-    let pExpenses = JSON.parse(localStorage.getItem('p_expenses')) || [
-      { id: 1, date: '2025-02-14', cat: 'Personal Dining, Coffee & Social', desc: 'Friday team lunch & coffee', amt: 24.50 },
-      { id: 2, date: '2025-02-16', cat: 'Mobile Phone & Personal Apps', desc: 'Spotify Family plan', amt: 18.99 },
-      { id: 3, date: '2025-02-18', cat: 'Personal Dining, Coffee & Social', desc: 'Morning flat white', amt: 6.50 },
-      { id: 4, date: '2025-02-20', cat: 'Clothing, Grooming & Hobby', desc: 'Weekend book purchase', amt: 35.00 },
-      { id: 5, date: '2025-02-22', cat: 'Clothing, Grooming & Hobby', desc: 'Electronics parts for DIY project', amt: 42.50 }
-    ];
+    let pExpenses = JSON.parse(localStorage.getItem('p_expenses')) || [];
     let liamBaseline = localStorage.getItem('liam_baseline') ? parseFloat(localStorage.getItem('liam_baseline')) : 1875.00;
     let amyBaseline = localStorage.getItem('amy_baseline') ? parseFloat(localStorage.getItem('amy_baseline')) : 1450.00;
     let personalPay = localStorage.getItem('personal_pay') ? parseFloat(localStorage.getItem('personal_pay')) : 3400.00;
 
-    // Set initial input values
     document.getElementById('liam-baseline').value = liamBaseline.toFixed(2);
     document.getElementById('amy-baseline').value = amyBaseline.toFixed(2);
     document.getElementById('p-pay-input').value = personalPay.toFixed(2);
@@ -665,6 +685,17 @@
     document.getElementById('p-log-date').value = currentMonth + '-01';
 
     function saveData() {
+      const data = {
+        hh_categories: hhCategories,
+        p_categories: pCategories,
+        hh_expenses: hhExpenses,
+        p_expenses: pExpenses,
+        liam_baseline: document.getElementById('liam-baseline').value,
+        amy_baseline: document.getElementById('amy-baseline').value,
+        personal_pay: document.getElementById('p-pay-input').value,
+        selected_month: currentMonth
+      };
+
       localStorage.setItem('hh_categories', JSON.stringify(hhCategories));
       localStorage.setItem('p_categories', JSON.stringify(pCategories));
       localStorage.setItem('hh_expenses', JSON.stringify(hhExpenses));
@@ -673,6 +704,43 @@
       localStorage.setItem('amy_baseline', document.getElementById('amy-baseline').value);
       localStorage.setItem('personal_pay', document.getElementById('p-pay-input').value);
       localStorage.setItem('selected_month', currentMonth);
+
+      if (useFirebase && db) {
+        db.ref('budget_data').set(data);
+      }
+    }
+
+    if (useFirebase && db) {
+      db.ref('budget_data').on('value', (snapshot) => {
+        const val = snapshot.val();
+        if (val) {
+          if (val.hh_categories) hhCategories = val.hh_categories;
+          if (val.p_categories) pCategories = val.p_categories;
+          if (val.hh_expenses) hhExpenses = val.hh_expenses;
+          if (val.p_expenses) pExpenses = val.p_expenses;
+          if (val.liam_baseline) {
+            liamBaseline = parseFloat(val.liam_baseline);
+            document.getElementById('liam-baseline').value = liamBaseline.toFixed(2);
+          }
+          if (val.amy_baseline) {
+            amyBaseline = parseFloat(val.amy_baseline);
+            document.getElementById('amy-baseline').value = amyBaseline.toFixed(2);
+          }
+          if (val.personal_pay) {
+            personalPay = parseFloat(val.personal_pay);
+            document.getElementById('p-pay-input').value = personalPay.toFixed(2);
+          }
+          if (val.selected_month) {
+            currentMonth = val.selected_month;
+            document.getElementById('global-month-selector').value = currentMonth;
+          }
+          populateDropdowns();
+          renderHousehold();
+          renderPersonal();
+          renderExpenseLogs('hh');
+          renderExpenseLogs('p');
+        }
+      });
     }
 
     function changeGlobalMonth(val) {
