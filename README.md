@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Household & Personal Budget Dashboard</title>
+  <title>Liam &amp; Amy Budget Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -1020,3 +1021,4 @@
   </script>
 </body>
 </html>
+```
