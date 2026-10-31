@@ -26,17 +26,6 @@
       background-color: #1e293b;
       color: #e2e8f0;
     }
-    /* Force dark table styles on GitHub Pages */
-    table {
-      background-color: #0f172a !important;
-      color: #e2e8f0 !important;
-      border-color: #1e293b !important;
-    }
-    th, td {
-      background-color: #0f172a !important;
-      color: #e2e8f0 !important;
-      border-color: #1e293b !important;
-    }
   </style>
 </head>
 <body class="min-h-screen p-4 sm:p-6 lg:p-8">
@@ -220,14 +209,23 @@
       </div>
 
       <!-- Joint / Household Category Table -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 overflow-x-auto">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 overflow-x-auto space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div class="flex items-center gap-2.5">
             <span class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-sm">🏡</span>
             <h2 class="text-base sm:text-lg font-bold text-white">Joint Household Budget Categories</h2>
           </div>
-          <span class="text-xs text-slate-400">✏️ Edit Monthly, Fortnightly, or Weekly amounts — the other columns calculate automatically</span>
+          <span class="text-xs text-slate-400">✏️ Edit Monthly, Fortnightly, or Weekly amounts — calculations update automatically</span>
         </div>
+
+        <!-- Add Category Form -->
+        <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-3 flex flex-wrap gap-2 items-center">
+          <input id="hh-new-name" type="text" placeholder="Category Name (e.g. Netflix)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 flex-1 min-w-[150px]" />
+          <input id="hh-new-group" type="text" placeholder="Group (e.g. Subscriptions)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 w-44" />
+          <input id="hh-new-amt" type="number" step="0.01" placeholder="Monthly ($)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 w-32" />
+          <button onclick="addCategory('hh')" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg text-xs whitespace-nowrap">+ Add Category</button>
+        </div>
+
         <table class="w-full text-xs sm:text-sm text-left bg-slate-900">
           <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px] bg-slate-900">
             <tr>
@@ -325,14 +323,27 @@
       </div>
 
       <!-- Personal Budget Category Table -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 overflow-x-auto">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 overflow-x-auto space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div class="flex items-center gap-2.5">
             <span class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-sm">📋</span>
             <h2 class="text-base sm:text-lg font-bold text-white">Personal Budget Breakdown</h2>
           </div>
-          <span class="text-xs text-slate-400">✏️ Edit Monthly, Fortnightly, or Weekly targets — the other columns calculate automatically</span>
+          <span class="text-xs text-slate-400">✏️ Edit Monthly, Fortnightly, or Weekly targets — calculations update automatically</span>
         </div>
+
+        <!-- Add Personal Category Form -->
+        <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-3 flex flex-wrap gap-2 items-center">
+          <input id="p-new-name" type="text" placeholder="Category Name (e.g. Hobbies)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 flex-1 min-w-[150px]" />
+          <select id="p-new-account" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 w-36">
+            <option value="Spending">Spending</option>
+            <option value="Bills">Bills</option>
+            <option value="Joint">Joint</option>
+          </select>
+          <input id="p-new-amt" type="number" step="0.01" placeholder="Monthly ($)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 w-32" />
+          <button onclick="addCategory('p')" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg text-xs whitespace-nowrap">+ Add Category</button>
+        </div>
+
         <table class="w-full text-xs sm:text-sm text-left bg-slate-900">
           <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px] bg-slate-900">
             <tr>
@@ -754,6 +765,40 @@
         hhCategories[idx].monthly = (num * 52) / 12;
       }
       renderHousehold();
+    }
+
+    function addCategory(type) {
+      if (type === 'hh') {
+        const nameInput = document.getElementById('hh-new-name');
+        const groupInput = document.getElementById('hh-new-group');
+        const amtInput = document.getElementById('hh-new-amt');
+        const name = nameInput.value.trim();
+        const group = groupInput.value.trim() || 'General';
+        const monthly = parseFloat(amtInput.value) || 0;
+        if (!name) return;
+
+        hhCategories.push({ id: 'hh-' + Date.now(), name, group, monthly, icon: '📌' });
+        nameInput.value = '';
+        groupInput.value = '';
+        amtInput.value = '';
+        renderHousehold();
+        populateDropdowns();
+      } else {
+        const nameInput = document.getElementById('p-new-name');
+        const accountInput = document.getElementById('p-new-account');
+        const amtInput = document.getElementById('p-new-amt');
+        const name = nameInput.value.trim();
+        const account = accountInput.value;
+        const monthly = parseFloat(amtInput.value) || 0;
+        if (!name) return;
+
+        pCategories.push({ id: 'p-' + Date.now(), name, account, monthly, icon: '📌' });
+        nameInput.value = '';
+        amtInput.value = '';
+        renderPersonal();
+        populateDropdowns();
+      }
+      saveData();
     }
 
     function deleteCategory(type, idx) {
