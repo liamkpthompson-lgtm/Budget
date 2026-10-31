@@ -212,13 +212,13 @@
             <span class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-sm">🏡</span>
             <h2 class="text-base sm:text-lg font-bold text-white">Joint Household Budget Categories</h2>
           </div>
-          <span class="text-xs text-slate-400">✏️ Edit Monthly, Fortnightly, or Weekly amounts — calculations update automatically</span>
+          <span class="text-xs text-slate-400">✏️ Edit Monthly amounts or sub-categories directly — calculations update automatically</span>
         </div>
 
         <!-- Add Category Form -->
         <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-3 flex flex-wrap gap-2 items-center">
           <input id="hh-new-name" type="text" placeholder="Category Name (e.g. Netflix)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 flex-1 min-w-[150px]" />
-          <input id="hh-new-group" type="text" placeholder="Group (e.g. Subscriptions)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 w-44" />
+          <input id="hh-new-group" type="text" placeholder="Sub-Category / Group (e.g. Subscriptions)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 w-52" />
           <input id="hh-new-amt" type="number" step="0.01" placeholder="Monthly ($)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 w-32" />
           <button onclick="addCategory('hh')" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg text-xs whitespace-nowrap">+ Add Category</button>
         </div>
@@ -226,24 +226,24 @@
         <table class="w-full text-xs sm:text-sm text-left bg-slate-900">
           <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px] bg-slate-900">
             <tr>
-              <th class="py-3 px-2 text-slate-400 bg-slate-900">Category</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">✏️ Monthly Budget</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">✏️ Fortnightly Budget</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">✏️ Weekly Budget</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">Actual Spend</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">Surplus / Remaining</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">Actions</th>
+              <th class="py-3 px-3 text-slate-400 bg-slate-900 min-w-[220px]">Category &amp; Sub-Category</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[140px]">Monthly Budget</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[140px]">Fortnightly</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[140px]">Weekly</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[110px]">Actual Spend</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[130px]">Surplus / Remaining</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[110px]">Actions</th>
             </tr>
           </thead>
           <tbody id="hh-category-tbody" class="divide-y divide-slate-800/70 bg-slate-900"></tbody>
           <tfoot class="border-t-2 border-slate-700 font-bold bg-slate-800/50 text-slate-200">
             <tr>
-              <td class="py-3 px-2 text-slate-200 bg-slate-800/50">Total Joint Budget</td>
-              <td id="hh-tot-mo" class="py-3 px-2 text-right text-slate-200 bg-slate-800/50">$0.00</td>
-              <td id="hh-tot-fn" class="py-3 px-2 text-right text-slate-200 bg-slate-800/50">$0.00</td>
-              <td id="hh-tot-wk" class="py-3 px-2 text-right text-slate-200 bg-slate-800/50">$0.00</td>
-              <td id="hh-tot-act" class="py-3 px-2 text-right text-slate-200 bg-slate-800/50">$0.00</td>
-              <td id="hh-tot-rem" class="py-3 px-2 text-right text-emerald-400 bg-slate-800/50">$0.00</td>
+              <td class="py-3 px-3 text-slate-200 bg-slate-800/50">Total Joint Budget</td>
+              <td id="hh-tot-mo" class="py-3 px-3 text-right text-slate-200 bg-slate-800/50">$0.00</td>
+              <td id="hh-tot-fn" class="py-3 px-3 text-right text-slate-200 bg-slate-800/50">$0.00</td>
+              <td id="hh-tot-wk" class="py-3 px-3 text-right text-slate-200 bg-slate-800/50">$0.00</td>
+              <td id="hh-tot-act" class="py-3 px-3 text-right text-slate-200 bg-slate-800/50">$0.00</td>
+              <td id="hh-tot-rem" class="py-3 px-3 text-right text-emerald-400 bg-slate-800/50">$0.00</td>
               <td class="bg-slate-800/50"></td>
             </tr>
           </tfoot>
@@ -326,16 +326,16 @@
             <span class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-sm">📋</span>
             <h2 class="text-base sm:text-lg font-bold text-white">Personal Budget Breakdown</h2>
           </div>
-          <span class="text-xs text-slate-400">✏️ Edit Monthly, Fortnightly, or Weekly targets — calculations update automatically</span>
+          <span class="text-xs text-slate-400">✏️ Edit Monthly targets or sub-category/account splits directly</span>
         </div>
 
         <!-- Add Personal Category Form -->
         <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-3 flex flex-wrap gap-2 items-center">
           <input id="p-new-name" type="text" placeholder="Category Name (e.g. Hobbies)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 flex-1 min-w-[150px]" />
-          <select id="p-new-account" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 w-36">
-            <option value="Spending">Spending</option>
-            <option value="Bills">Bills</option>
-            <option value="Joint">Joint</option>
+          <select id="p-new-account" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 w-40">
+            <option value="Spending">Spending Sub-Cat</option>
+            <option value="Bills">Bills Sub-Cat</option>
+            <option value="Joint">Joint Sub-Cat</option>
           </select>
           <input id="p-new-amt" type="number" step="0.01" placeholder="Monthly ($)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 w-32" />
           <button onclick="addCategory('p')" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg text-xs whitespace-nowrap">+ Add Category</button>
@@ -344,24 +344,24 @@
         <table class="w-full text-xs sm:text-sm text-left bg-slate-900">
           <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px] bg-slate-900">
             <tr>
-              <th class="py-3 px-2 text-slate-400 bg-slate-900">Category</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">✏️ Monthly Budget</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">✏️ Fortnightly Budget</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">✏️ Weekly Budget</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">Actual Spend (FN)</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">Surplus / Remaining (FN)</th>
-              <th class="py-3 px-2 text-right text-slate-400 bg-slate-900">Actions</th>
+              <th class="py-3 px-3 text-slate-400 bg-slate-900 min-w-[220px]">Category &amp; Sub-Category</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[140px]">Monthly Budget</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[140px]">Fortnightly</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[140px]">Weekly</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[110px]">Actual Spend (FN)</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[130px]">Surplus / Remaining (FN)</th>
+              <th class="py-3 px-3 text-right text-slate-400 bg-slate-900 min-w-[110px]">Actions</th>
             </tr>
           </thead>
           <tbody id="p-category-tbody" class="divide-y divide-slate-800/70 bg-slate-900"></tbody>
           <tfoot class="border-t-2 border-slate-700 font-bold bg-slate-800/50 text-slate-200">
             <tr>
-              <td class="py-3 px-2 text-slate-200 bg-slate-800/50">Total Personal Budget</td>
-              <td id="p-tot-mo" class="py-3 px-2 text-right text-slate-200 bg-slate-800/50">$0.00</td>
-              <td id="p-tot-fn" class="py-3 px-2 text-right text-slate-200 bg-slate-800/50">$0.00</td>
-              <td id="p-tot-wk" class="py-3 px-2 text-right text-slate-200 bg-slate-800/50">$0.00</td>
-              <td id="p-tot-act" class="py-3 px-2 text-right text-slate-200 bg-slate-800/50">$0.00</td>
-              <td id="p-tot-rem" class="py-3 px-2 text-right text-emerald-400 bg-slate-800/50">$0.00</td>
+              <td class="py-3 px-3 text-slate-200 bg-slate-800/50">Total Personal Budget</td>
+              <td id="p-tot-mo" class="py-3 px-3 text-right text-slate-200 bg-slate-800/50">$0.00</td>
+              <td id="p-tot-fn" class="py-3 px-3 text-right text-slate-200 bg-slate-800/50">$0.00</td>
+              <td id="p-tot-wk" class="py-3 px-3 text-right text-slate-200 bg-slate-800/50">$0.00</td>
+              <td id="p-tot-act" class="py-3 px-3 text-right text-slate-200 bg-slate-800/50">$0.00</td>
+              <td id="p-tot-rem" class="py-3 px-3 text-right text-emerald-400 bg-slate-800/50">$0.00</td>
               <td class="bg-slate-800/50"></td>
             </tr>
           </tfoot>
@@ -725,32 +725,32 @@
 
         tbody.innerHTML += `
           <tr class="hover:bg-slate-800/30 transition bg-slate-900">
-            <td class="py-3 px-2 font-medium text-slate-200 bg-slate-900">
+            <td class="py-3 px-3 font-medium text-slate-200 bg-slate-900">
               <div class="flex items-center gap-2.5">
                 <span class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-base shrink-0">${cat.icon}</span>
                 <div>
-                  <div class="text-slate-200">${cat.name}</div>
+                  <div class="text-slate-200 font-semibold">${cat.name}</div>
                   <span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">${cat.group}</span>
                 </div>
               </div>
             </td>
-            <td class="py-3 px-2 text-right bg-slate-900">
+            <td class="py-3 px-3 text-right bg-slate-900">
               <input type="number" step="0.01" value="${mo.toFixed(2)}" onchange="updateHhCat(${idx}, 'mo', this.value)"
                 class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-slate-200 focus:outline-none focus:border-blue-500" />
             </td>
-            <td class="py-3 px-2 text-right bg-slate-900">
+            <td class="py-3 px-3 text-right bg-slate-900">
               <input type="number" step="0.01" value="${fn.toFixed(2)}" onchange="updateHhCat(${idx}, 'fn', this.value)"
                 class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-blue-300 focus:outline-none focus:border-blue-500" />
             </td>
-            <td class="py-3 px-2 text-right bg-slate-900">
+            <td class="py-3 px-3 text-right bg-slate-900">
               <input type="number" step="0.01" value="${wk.toFixed(2)}" onchange="updateHhCat(${idx}, 'wk', this.value)"
                 class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-indigo-300 focus:outline-none focus:border-blue-500" />
             </td>
-            <td class="py-3 px-2 text-right text-slate-300 bg-slate-900">${fmt(actual)}</td>
-            <td class="py-3 px-2 text-right font-semibold ${rem >= 0 ? 'text-emerald-400' : 'text-rose-400'} bg-slate-900">${fmt(rem)}</td>
-            <td class="py-3 px-2 text-right bg-slate-900 space-x-1">
-              <button onclick="editCategory('hh', ${idx})" class="text-blue-400 hover:text-blue-300 text-xs font-semibold px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20">Edit</button>
-              <button onclick="deleteCategory('hh', ${idx})" class="text-rose-400 hover:text-rose-300 text-xs font-semibold px-2 py-1 rounded bg-rose-500/10 border border-rose-500/20">Delete</button>
+            <td class="py-3 px-3 text-right text-slate-300 bg-slate-900">${fmt(actual)}</td>
+            <td class="py-3 px-3 text-right font-semibold ${rem >= 0 ? 'text-emerald-400' : 'text-rose-400'} bg-slate-900">${fmt(rem)}</td>
+            <td class="py-3 px-3 text-right bg-slate-900 space-x-1 whitespace-nowrap">
+              <button onclick="editCategory('hh', ${idx})" class="text-blue-400 hover:text-blue-300 text-xs font-semibold px-2.5 py-1 rounded bg-blue-500/10 border border-blue-500/20">Edit</button>
+              <button onclick="deleteCategory('hh', ${idx})" class="text-rose-400 hover:text-rose-300 text-xs font-semibold px-2.5 py-1 rounded bg-rose-500/10 border border-rose-500/20">Delete</button>
             </td>
           </tr>
         `;
@@ -830,15 +830,15 @@
       if (isNaN(newMonthly)) return;
 
       if (type === 'hh') {
-        const newGroup = prompt("Edit group category:", cat.group) || cat.group;
+        const newGroup = prompt("Edit sub-category / group:", cat.group) || cat.group;
         cat.name = trimmedName;
-        cat.group = newGroup;
+        cat.group = newGroup.trim();
         cat.monthly = newMonthly;
         renderHousehold();
       } else {
-        const newAccount = prompt("Edit account (Spending, Bills, Joint):", cat.account) || cat.account;
+        const newAccount = prompt("Edit sub-category / account (Spending, Bills, Joint):", cat.account) || cat.account;
         cat.name = trimmedName;
-        cat.account = newAccount;
+        cat.account = newAccount.trim();
         cat.monthly = newMonthly;
         renderPersonal();
       }
@@ -920,32 +920,32 @@
 
         tbody.innerHTML += `
           <tr class="hover:bg-slate-800/30 transition bg-slate-900">
-            <td class="py-3 px-2 font-medium text-slate-200 bg-slate-900">
+            <td class="py-3 px-3 font-medium text-slate-200 bg-slate-900">
               <div class="flex items-center gap-2.5">
                 <span class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-base shrink-0">${cat.icon}</span>
                 <div>
-                  <div class="text-slate-200">${cat.name}</div>
+                  <div class="text-slate-200 font-semibold">${cat.name}</div>
                   <span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">${cat.account}</span>
                 </div>
               </div>
             </td>
-            <td class="py-3 px-2 text-right bg-slate-900">
+            <td class="py-3 px-3 text-right bg-slate-900">
               <input type="number" step="0.01" value="${mo.toFixed(2)}" onchange="updatePCat(${idx}, 'mo', this.value)"
                 class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-slate-200 focus:outline-none focus:border-blue-500" />
             </td>
-            <td class="py-3 px-2 text-right bg-slate-900">
+            <td class="py-3 px-3 text-right bg-slate-900">
               <input type="number" step="0.01" value="${fn.toFixed(2)}" onchange="updatePCat(${idx}, 'fn', this.value)"
                 class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-blue-300 focus:outline-none focus:border-blue-500" />
             </td>
-            <td class="py-3 px-2 text-right bg-slate-900">
+            <td class="py-3 px-3 text-right bg-slate-900">
               <input type="number" step="0.01" value="${wk.toFixed(2)}" onchange="updatePCat(${idx}, 'wk', this.value)"
                 class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-indigo-300 focus:outline-none focus:border-blue-500" />
             </td>
-            <td class="py-3 px-2 text-right text-slate-300 bg-slate-900">${fmt(actual)}</td>
-            <td class="py-3 px-2 text-right font-semibold ${rem >= 0 ? 'text-emerald-400' : 'text-rose-400'} bg-slate-900">${fmt(rem)}</td>
-            <td class="py-3 px-2 text-right bg-slate-900 space-x-1">
-              <button onclick="editCategory('p', ${idx})" class="text-blue-400 hover:text-blue-300 text-xs font-semibold px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20">Edit</button>
-              <button onclick="deleteCategory('p', ${idx})" class="text-rose-400 hover:text-rose-300 text-xs font-semibold px-2 py-1 rounded bg-rose-500/10 border border-rose-500/20">Delete</button>
+            <td class="py-3 px-3 text-right text-slate-300 bg-slate-900">${fmt(actual)}</td>
+            <td class="py-3 px-3 text-right font-semibold ${rem >= 0 ? 'text-emerald-400' : 'text-rose-400'} bg-slate-900">${fmt(rem)}</td>
+            <td class="py-3 px-3 text-right bg-slate-900 space-x-1 whitespace-nowrap">
+              <button onclick="editCategory('p', ${idx})" class="text-blue-400 hover:text-blue-300 text-xs font-semibold px-2.5 py-1 rounded bg-blue-500/10 border border-blue-500/20">Edit</button>
+              <button onclick="deleteCategory('p', ${idx})" class="text-rose-400 hover:text-rose-300 text-xs font-semibold px-2.5 py-1 rounded bg-rose-500/10 border border-rose-500/20">Delete</button>
             </td>
           </tr>
         `;
@@ -1121,13 +1121,13 @@
       } else {
         tbody.innerHTML = list.map(item => `
           <tr class="bg-slate-900">
-            <td class="py-2.5 text-slate-300 bg-slate-900">${item.date}</td>
-            <td class="py-2.5 font-medium text-slate-200 bg-slate-900">
+            <td class="py-2.5 px-3 text-slate-300 bg-slate-900">${item.date}</td>
+            <td class="py-2.5 px-3 font-medium text-slate-200 bg-slate-900">
               <span class="mr-1.5">${getCategoryIcon(type, item.cat)}</span>${item.cat}
             </td>
-            <td class="py-2.5 text-slate-300 bg-slate-900">${item.desc}</td>
-            <td class="py-2.5 text-right font-semibold text-slate-200 bg-slate-900">${fmt(item.amt)}</td>
-            <td class="py-2.5 text-right bg-slate-900">
+            <td class="py-2.5 px-3 text-slate-300 bg-slate-900">${item.desc}</td>
+            <td class="py-2.5 px-3 text-right font-semibold text-slate-200 bg-slate-900">${fmt(item.amt)}</td>
+            <td class="py-2.5 px-3 text-right bg-slate-900">
               <button onclick="deleteExpense('${type}', ${item.id})" class="text-rose-400 hover:text-rose-300 text-xs font-semibold px-2 py-1 rounded bg-rose-500/10 border border-rose-500/20">Remove</button>
             </td>
           </tr>
