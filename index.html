@@ -696,6 +696,7 @@
         selected_month: currentMonth
       };
 
+      // Always update local cache as a reliable fallback
       localStorage.setItem('hh_categories', JSON.stringify(hhCategories));
       localStorage.setItem('p_categories', JSON.stringify(pCategories));
       localStorage.setItem('hh_expenses', JSON.stringify(hhExpenses));
@@ -705,8 +706,11 @@
       localStorage.setItem('personal_pay', document.getElementById('p-pay-input').value);
       localStorage.setItem('selected_month', currentMonth);
 
+      // Push complete state to Firebase Cloud Realtime Database
       if (useFirebase && db) {
-        db.ref('budget_data').set(data);
+        db.ref('budget_data').set(data).catch((err) => {
+          console.error("Cloud sync save error:", err);
+        });
       }
     }
 
