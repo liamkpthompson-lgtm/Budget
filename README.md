@@ -26,6 +26,10 @@
       background-color: #1e293b;
       color: #e2e8f0;
     }
+    /* Explicitly prevent browser default table/input color overrides */
+    table, th, td, input, select {
+      color: #e2e8f0 !important;
+    }
   </style>
 </head>
 <body class="min-h-screen p-4 sm:p-6 lg:p-8">
@@ -140,31 +144,31 @@
           <table class="w-full text-xs sm:text-sm text-left">
             <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px]">
               <tr>
-                <th class="py-2">Contributor</th>
-                <th class="py-2 text-right">Baseline Input</th>
-                <th class="py-2 text-right">% Split</th>
-                <th class="py-2 text-right">Dynamic Required</th>
+                <th class="py-2 text-slate-400">Contributor</th>
+                <th class="py-2 text-right text-slate-400">Baseline Input</th>
+                <th class="py-2 text-right text-slate-400">% Split</th>
+                <th class="py-2 text-right text-slate-400">Dynamic Required</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-800/70">
               <tr>
-                <td class="py-2.5 font-semibold text-white">Liam</td>
+                <td class="py-2.5 font-semibold text-slate-200">Liam</td>
                 <td class="py-2.5 text-right">
-                  <input id="liam-baseline" type="number" step="0.01" value="1875.00" onchange="updateContributors()" class="w-24 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-white focus:outline-none focus:border-blue-500" />
+                  <input id="liam-baseline" type="number" step="0.01" value="1875.00" onchange="updateContributors()" class="w-24 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-slate-200 focus:outline-none focus:border-blue-500" />
                 </td>
                 <td id="liam-split-pct" class="py-2.5 text-right text-slate-300">56.4%</td>
                 <td id="liam-dynamic-req" class="py-2.5 text-right font-semibold text-blue-400">$1,858.56</td>
               </tr>
               <tr>
-                <td class="py-2.5 font-semibold text-white">Amy</td>
+                <td class="py-2.5 font-semibold text-slate-200">Amy</td>
                 <td class="py-2.5 text-right">
-                  <input id="amy-baseline" type="number" step="0.01" value="1450.00" onchange="updateContributors()" class="w-24 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-white focus:outline-none focus:border-blue-500" />
+                  <input id="amy-baseline" type="number" step="0.01" value="1450.00" onchange="updateContributors()" class="w-24 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-slate-200 focus:outline-none focus:border-blue-500" />
                 </td>
                 <td id="amy-split-pct" class="py-2.5 text-right text-slate-300">43.6%</td>
                 <td id="amy-dynamic-req" class="py-2.5 text-right font-semibold text-blue-400">$1,437.29</td>
               </tr>
               <tr class="font-bold bg-slate-800/40">
-                <td class="py-2.5 text-white">Total Fortnightly Income Pool</td>
+                <td class="py-2.5 text-slate-200">Total Fortnightly Income Pool</td>
                 <td id="pool-baseline-total" class="py-2.5 text-right text-emerald-400">$3,325.00</td>
                 <td class="py-2.5 text-right text-slate-300">100.0%</td>
                 <td id="pool-dynamic-total" class="py-2.5 text-right text-blue-400">$3,295.85</td>
@@ -189,11 +193,11 @@
             <div class="space-y-3 text-xs sm:text-sm">
               <div class="flex justify-between py-2 border-b border-slate-800">
                 <span class="text-slate-400">Total Fortnightly Income Pool</span>
-                <span id="rec-pool" class="font-semibold text-white">$3,325.00</span>
+                <span id="rec-pool" class="font-semibold text-slate-200">$3,325.00</span>
               </div>
               <div class="flex justify-between py-2 border-b border-slate-800">
                 <span class="text-slate-400">Total Fortnightly Budget Required</span>
-                <span id="rec-req" class="font-semibold text-white">$3,295.85</span>
+                <span id="rec-req" class="font-semibold text-slate-200">$3,295.85</span>
               </div>
               <div class="flex justify-between py-2 border-b border-slate-800">
                 <span class="text-slate-300 font-medium">Fortnightly Difference / Buffer (Surplus to Savings)</span>
@@ -220,23 +224,23 @@
         <table class="w-full text-xs sm:text-sm text-left">
           <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px]">
             <tr>
-              <th class="py-3 px-2">Category</th>
-              <th class="py-3 px-2 text-right">✏️ Monthly Budget</th>
-              <th class="py-3 px-2 text-right">✏️ Fortnightly Budget</th>
-              <th class="py-3 px-2 text-right">✏️ Weekly Budget</th>
-              <th class="py-3 px-2 text-right">Actual Spend</th>
-              <th class="py-3 px-2 text-right">Surplus / Remaining</th>
-              <th class="py-3 px-2 text-right">Action</th>
+              <th class="py-3 px-2 text-slate-400">Category</th>
+              <th class="py-3 px-2 text-right text-slate-400">✏️ Monthly Budget</th>
+              <th class="py-3 px-2 text-right text-slate-400">✏️ Fortnightly Budget</th>
+              <th class="py-3 px-2 text-right text-slate-400">✏️ Weekly Budget</th>
+              <th class="py-3 px-2 text-right text-slate-400">Actual Spend</th>
+              <th class="py-3 px-2 text-right text-slate-400">Surplus / Remaining</th>
+              <th class="py-3 px-2 text-right text-slate-400">Action</th>
             </tr>
           </thead>
           <tbody id="hh-category-tbody" class="divide-y divide-slate-800/70"></tbody>
-          <tfoot class="border-t-2 border-slate-700 font-bold bg-slate-800/50 text-white">
+          <tfoot class="border-t-2 border-slate-700 font-bold bg-slate-800/50 text-slate-200">
             <tr>
-              <td class="py-3 px-2">Total Joint Budget</td>
-              <td id="hh-tot-mo" class="py-3 px-2 text-right">$0.00</td>
-              <td id="hh-tot-fn" class="py-3 px-2 text-right">$0.00</td>
-              <td id="hh-tot-wk" class="py-3 px-2 text-right">$0.00</td>
-              <td id="hh-tot-act" class="py-3 px-2 text-right">$0.00</td>
+              <td class="py-3 px-2 text-slate-200">Total Joint Budget</td>
+              <td id="hh-tot-mo" class="py-3 px-2 text-right text-slate-200">$0.00</td>
+              <td id="hh-tot-fn" class="py-3 px-2 text-right text-slate-200">$0.00</td>
+              <td id="hh-tot-wk" class="py-3 px-2 text-right text-slate-200">$0.00</td>
+              <td id="hh-tot-act" class="py-3 px-2 text-right text-slate-200">$0.00</td>
               <td id="hh-tot-rem" class="py-3 px-2 text-right text-emerald-400">$0.00</td>
               <td></td>
             </tr>
@@ -271,7 +275,7 @@
           </div>
           <div class="mt-2 flex items-center">
             <span class="text-xl font-bold text-blue-400 mr-1">$</span>
-            <input id="p-pay-input" type="number" step="0.01" value="3400.00" onchange="updatePersonalPay()" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xl font-bold text-white focus:outline-none focus:border-blue-400" />
+            <input id="p-pay-input" type="number" step="0.01" value="3400.00" onchange="updatePersonalPay()" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xl font-bold text-slate-200 focus:outline-none focus:border-blue-400" />
           </div>
           <div class="text-xs text-slate-400 mt-1.5">Base / cycle take-home pay</div>
         </div>
@@ -281,7 +285,7 @@
             <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Total Fortnightly Expenses</div>
             <span>📤</span>
           </div>
-          <div id="p-kpi-expenses" class="text-2xl font-bold text-white mt-2">$0.00</div>
+          <div id="p-kpi-expenses" class="text-2xl font-bold text-slate-200 mt-2">$0.00</div>
           <div id="p-kpi-expenses-sub" class="text-xs text-slate-400 mt-1.5">Fixed + Discretionary</div>
         </div>
 
@@ -325,23 +329,23 @@
         <table class="w-full text-xs sm:text-sm text-left">
           <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px]">
             <tr>
-              <th class="py-3 px-2">Category</th>
-              <th class="py-3 px-2 text-right">✏️ Monthly Budget</th>
-              <th class="py-3 px-2 text-right">✏️ Fortnightly Budget</th>
-              <th class="py-3 px-2 text-right">✏️ Weekly Budget</th>
-              <th class="py-3 px-2 text-right">Actual Spend (FN)</th>
-              <th class="py-3 px-2 text-right">Surplus / Remaining (FN)</th>
-              <th class="py-3 px-2 text-right">Action</th>
+              <th class="py-3 px-2 text-slate-400">Category</th>
+              <th class="py-3 px-2 text-right text-slate-400">✏️ Monthly Budget</th>
+              <th class="py-3 px-2 text-right text-slate-400">✏️ Fortnightly Budget</th>
+              <th class="py-3 px-2 text-right text-slate-400">✏️ Weekly Budget</th>
+              <th class="py-3 px-2 text-right text-slate-400">Actual Spend (FN)</th>
+              <th class="py-3 px-2 text-right text-slate-400">Surplus / Remaining (FN)</th>
+              <th class="py-3 px-2 text-right text-slate-400">Action</th>
             </tr>
           </thead>
           <tbody id="p-category-tbody" class="divide-y divide-slate-800/70"></tbody>
-          <tfoot class="border-t-2 border-slate-700 font-bold bg-slate-800/50 text-white">
+          <tfoot class="border-t-2 border-slate-700 font-bold bg-slate-800/50 text-slate-200">
             <tr>
-              <td class="py-3 px-2">Total Personal Budget</td>
-              <td id="p-tot-mo" class="py-3 px-2 text-right">$0.00</td>
-              <td id="p-tot-fn" class="py-3 px-2 text-right">$0.00</td>
-              <td id="p-tot-wk" class="py-3 px-2 text-right">$0.00</td>
-              <td id="p-tot-act" class="py-3 px-2 text-right">$0.00</td>
+              <td class="py-3 px-2 text-slate-200">Total Personal Budget</td>
+              <td id="p-tot-mo" class="py-3 px-2 text-right text-slate-200">$0.00</td>
+              <td id="p-tot-fn" class="py-3 px-2 text-right text-slate-200">$0.00</td>
+              <td id="p-tot-wk" class="py-3 px-2 text-right text-slate-200">$0.00</td>
+              <td id="p-tot-act" class="py-3 px-2 text-right text-slate-200">$0.00</td>
               <td id="p-tot-rem" class="py-3 px-2 text-right text-emerald-400">$0.00</td>
               <td></td>
             </tr>
@@ -357,47 +361,47 @@
           <table class="w-full text-xs sm:text-sm text-left">
             <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px]">
               <tr>
-                <th class="py-2">Account</th>
-                <th class="py-2 text-right">Monthly</th>
-                <th class="py-2 text-right">Fortnightly</th>
-                <th class="py-2 text-right">Weekly</th>
-                <th class="py-2 text-right">Actual</th>
-                <th class="py-2 text-right">Remaining</th>
+                <th class="py-2 text-slate-400">Account</th>
+                <th class="py-2 text-right text-slate-400">Monthly</th>
+                <th class="py-2 text-right text-slate-400">Fortnightly</th>
+                <th class="py-2 text-right text-slate-400">Weekly</th>
+                <th class="py-2 text-right text-slate-400">Actual</th>
+                <th class="py-2 text-right text-slate-400">Remaining</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-800/70">
               <tr>
-                <td class="py-2.5 font-semibold text-white">
+                <td class="py-2.5 font-semibold text-slate-200">
                   <div class="flex items-center gap-2">
                     <span class="w-7 h-7 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center">💳</span>
-                    <span>Spending Account</span>
+                    <span class="text-slate-200">Spending Account</span>
                   </div>
                 </td>
-                <td id="acc-spend-mo" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-spend-fn" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-spend-wk" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-spend-act" class="py-2.5 text-right">$0.00</td>
+                <td id="acc-spend-mo" class="py-2.5 text-right text-slate-300">$0.00</td>
+                <td id="acc-spend-fn" class="py-2.5 text-right text-slate-300">$0.00</td>
+                <td id="acc-spend-wk" class="py-2.5 text-right text-slate-300">$0.00</td>
+                <td id="acc-spend-act" class="py-2.5 text-right text-slate-300">$0.00</td>
                 <td id="acc-spend-rem" class="py-2.5 text-right text-emerald-400">$0.00</td>
               </tr>
               <tr>
-                <td class="py-2.5 font-semibold text-white">
+                <td class="py-2.5 font-semibold text-slate-200">
                   <div class="flex items-center gap-2">
                     <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center">🧾</span>
-                    <span>Bills Account</span>
+                    <span class="text-slate-200">Bills Account</span>
                   </div>
                 </td>
-                <td id="acc-bills-mo" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-bills-fn" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-bills-wk" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-bills-act" class="py-2.5 text-right">$0.00</td>
+                <td id="acc-bills-mo" class="py-2.5 text-right text-slate-300">$0.00</td>
+                <td id="acc-bills-fn" class="py-2.5 text-right text-slate-300">$0.00</td>
+                <td id="acc-bills-wk" class="py-2.5 text-right text-slate-300">$0.00</td>
+                <td id="acc-bills-act" class="py-2.5 text-right text-slate-300">$0.00</td>
                 <td id="acc-bills-rem" class="py-2.5 text-right text-emerald-400">$0.00</td>
               </tr>
-              <tr class="font-bold bg-slate-800/40 text-white">
-                <td class="py-2.5">Total Personal (Excl. Joint)</td>
-                <td id="acc-tot-mo" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-tot-fn" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-tot-wk" class="py-2.5 text-right">$0.00</td>
-                <td id="acc-tot-act" class="py-2.5 text-right">$0.00</td>
+              <tr class="font-bold bg-slate-800/40 text-slate-200">
+                <td class="py-2.5 text-slate-200">Total Personal (Excl. Joint)</td>
+                <td id="acc-tot-mo" class="py-2.5 text-right text-slate-200">$0.00</td>
+                <td id="acc-tot-fn" class="py-2.5 text-right text-slate-200">$0.00</td>
+                <td id="acc-tot-wk" class="py-2.5 text-right text-slate-200">$0.00</td>
+                <td id="acc-tot-act" class="py-2.5 text-right text-slate-200">$0.00</td>
                 <td id="acc-tot-rem" class="py-2.5 text-right text-emerald-400">$0.00</td>
               </tr>
             </tbody>
@@ -410,35 +414,35 @@
           <table class="w-full text-xs sm:text-sm text-left">
             <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px]">
               <tr>
-                <th class="py-2">Frequency</th>
-                <th class="py-2 text-right">Take-Home Pay</th>
-                <th class="py-2 text-right">Budget Expenses</th>
-                <th class="py-2 text-right">Target Surplus</th>
+                <th class="py-2 text-slate-400">Frequency</th>
+                <th class="py-2 text-right text-slate-400">Take-Home Pay</th>
+                <th class="py-2 text-right text-slate-400">Budget Expenses</th>
+                <th class="py-2 text-right text-slate-400">Target Surplus</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-800/70">
               <tr>
-                <td class="py-2.5 font-semibold text-white">⏱️ Weekly</td>
-                <td id="freq-wk-pay" class="py-2.5 text-right">$1,700.00</td>
-                <td id="freq-wk-exp" class="py-2.5 text-right">$0.00</td>
+                <td class="py-2.5 font-semibold text-slate-200">⏱️ Weekly</td>
+                <td id="freq-wk-pay" class="py-2.5 text-right text-slate-300">$1,700.00</td>
+                <td id="freq-wk-exp" class="py-2.5 text-right text-slate-300">$0.00</td>
                 <td id="freq-wk-sur" class="py-2.5 text-right font-semibold text-emerald-400">$0.00</td>
               </tr>
               <tr>
-                <td class="py-2.5 font-semibold text-white">📅 Fortnightly</td>
-                <td id="freq-fn-pay" class="py-2.5 text-right">$3,400.00</td>
-                <td id="freq-fn-exp" class="py-2.5 text-right">$0.00</td>
+                <td class="py-2.5 font-semibold text-slate-200">📅 Fortnightly</td>
+                <td id="freq-fn-pay" class="py-2.5 text-right text-slate-300">$3,400.00</td>
+                <td id="freq-fn-exp" class="py-2.5 text-right text-slate-300">$0.00</td>
                 <td id="freq-fn-sur" class="py-2.5 text-right font-semibold text-emerald-400">$0.00</td>
               </tr>
               <tr>
-                <td class="py-2.5 font-semibold text-white">🗓️ Monthly</td>
-                <td id="freq-mo-pay" class="py-2.5 text-right">$7,366.67</td>
-                <td id="freq-mo-exp" class="py-2.5 text-right">$0.00</td>
+                <td class="py-2.5 font-semibold text-slate-200">🗓️ Monthly</td>
+                <td id="freq-mo-pay" class="py-2.5 text-right text-slate-300">$7,366.67</td>
+                <td id="freq-mo-exp" class="py-2.5 text-right text-slate-300">$0.00</td>
                 <td id="freq-mo-sur" class="py-2.5 text-right font-semibold text-emerald-400">$0.00</td>
               </tr>
-              <tr class="font-bold bg-slate-800/40 text-white">
-                <td class="py-2.5">🎯 Annual (26 Pays)</td>
-                <td id="freq-yr-pay" class="py-2.5 text-right">$88,400.00</td>
-                <td id="freq-yr-exp" class="py-2.5 text-right">$0.00</td>
+              <tr class="font-bold bg-slate-800/40 text-slate-200">
+                <td class="py-2.5 text-slate-200">🎯 Annual (26 Pays)</td>
+                <td id="freq-yr-pay" class="py-2.5 text-right text-slate-200">$88,400.00</td>
+                <td id="freq-yr-exp" class="py-2.5 text-right text-slate-200">$0.00</td>
                 <td id="freq-yr-sur" class="py-2.5 text-right text-emerald-400">$0.00</td>
               </tr>
             </tbody>
@@ -452,42 +456,42 @@
         <table class="w-full text-xs sm:text-sm text-left">
           <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px]">
             <tr>
-              <th class="py-2">Component</th>
-              <th class="py-2 text-right">Budgeted</th>
-              <th class="py-2 text-right">Actual to Date</th>
-              <th class="py-2 text-right">Variance / Buffer</th>
+              <th class="py-2 text-slate-400">Component</th>
+              <th class="py-2 text-right text-slate-400">Budgeted</th>
+              <th class="py-2 text-right text-slate-400">Actual to Date</th>
+              <th class="py-2 text-right text-slate-400">Variance / Buffer</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-800/70">
             <tr>
-              <td class="py-2.5 font-semibold text-white">💵 Fortnightly Take-Home Pay</td>
-              <td id="p-rec-pay-bud" class="py-2.5 text-right">$3,400.00</td>
-              <td id="p-rec-pay-act" class="py-2.5 text-right">$3,400.00</td>
-              <td class="py-2.5 text-right">$0.00</td>
+              <td class="py-2.5 font-semibold text-slate-200">💵 Fortnightly Take-Home Pay</td>
+              <td id="p-rec-pay-bud" class="py-2.5 text-right text-slate-300">$3,400.00</td>
+              <td id="p-rec-pay-act" class="py-2.5 text-right text-slate-300">$3,400.00</td>
+              <td class="py-2.5 text-right text-slate-300">$0.00</td>
             </tr>
             <tr>
               <td class="py-2.5 text-slate-300">🏡 Less: Fixed Household Transfer</td>
-              <td id="p-rec-hh-bud" class="py-2.5 text-right">$1,875.00</td>
-              <td id="p-rec-hh-act" class="py-2.5 text-right">$0.00</td>
-              <td id="p-rec-hh-var" class="py-2.5 text-right">$1,875.00</td>
+              <td id="p-rec-hh-bud" class="py-2.5 text-right text-slate-300">$1,875.00</td>
+              <td id="p-rec-hh-act" class="py-2.5 text-right text-slate-300">$0.00</td>
+              <td id="p-rec-hh-var" class="py-2.5 text-right text-slate-300">$1,875.00</td>
             </tr>
             <tr>
               <td class="py-2.5 text-slate-300">🛍️ Less: Personal Discretionary Spending</td>
-              <td id="p-rec-disc-bud" class="py-2.5 text-right">$0.00</td>
-              <td id="p-rec-disc-act" class="py-2.5 text-right">$0.00</td>
-              <td id="p-rec-disc-var" class="py-2.5 text-right">$0.00</td>
+              <td id="p-rec-disc-bud" class="py-2.5 text-right text-slate-300">$0.00</td>
+              <td id="p-rec-disc-act" class="py-2.5 text-right text-slate-300">$0.00</td>
+              <td id="p-rec-disc-var" class="py-2.5 text-right text-slate-300">$0.00</td>
             </tr>
-            <tr class="font-semibold">
-              <td class="py-2.5 text-white">📤 Total Fortnightly Outflows</td>
-              <td id="p-rec-out-bud" class="py-2.5 text-right">$0.00</td>
-              <td id="p-rec-out-act" class="py-2.5 text-right">$0.00</td>
-              <td id="p-rec-out-var" class="py-2.5 text-right">$0.00</td>
+            <tr class="font-semibold text-slate-200">
+              <td class="py-2.5 text-slate-200">📤 Total Fortnightly Outflows</td>
+              <td id="p-rec-out-bud" class="py-2.5 text-right text-slate-200">$0.00</td>
+              <td id="p-rec-out-act" class="py-2.5 text-right text-slate-200">$0.00</td>
+              <td id="p-rec-out-var" class="py-2.5 text-right text-slate-200">$0.00</td>
             </tr>
             <tr class="font-bold bg-emerald-950/30 text-emerald-400">
-              <td class="py-2.5">🏦 Net Surplus Available to Transfer to Savings</td>
-              <td id="p-rec-net-bud" class="py-2.5 text-right">$0.00</td>
-              <td id="p-rec-net-act" class="py-2.5 text-right">$3,400.00</td>
-              <td id="p-rec-net-var" class="py-2.5 text-right">$0.00</td>
+              <td class="py-2.5 text-emerald-400">🏦 Net Surplus Available to Transfer to Savings</td>
+              <td id="p-rec-net-bud" class="py-2.5 text-right text-emerald-400">$0.00</td>
+              <td id="p-rec-net-act" class="py-2.5 text-right text-emerald-400">$3,400.00</td>
+              <td id="p-rec-net-var" class="py-2.5 text-right text-emerald-400">$0.00</td>
             </tr>
           </tbody>
         </table>
@@ -506,11 +510,11 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-6">
-          <input id="hh-log-date" type="date" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white" />
-          <select id="hh-log-cat" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white"></select>
-          <input id="hh-log-desc" type="text" placeholder="Description" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white" />
+          <input id="hh-log-date" type="date" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200" />
+          <select id="hh-log-cat" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200"></select>
+          <input id="hh-log-desc" type="text" placeholder="Description" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200" />
           <div class="flex gap-2">
-            <input id="hh-log-amt" type="number" step="0.01" placeholder="Amount ($)" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white" />
+            <input id="hh-log-amt" type="number" step="0.01" placeholder="Amount ($)" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200" />
             <button onclick="addExpense('hh')" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-sm whitespace-nowrap">Add</button>
           </div>
         </div>
@@ -519,11 +523,11 @@
           <table class="w-full text-xs sm:text-sm text-left">
             <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px]">
               <tr>
-                <th class="py-2.5">Date</th>
-                <th class="py-2.5">Category</th>
-                <th class="py-2.5">Description</th>
-                <th class="py-2.5 text-right">Amount</th>
-                <th class="py-2.5 text-right">Action</th>
+                <th class="py-2.5 text-slate-400">Date</th>
+                <th class="py-2.5 text-slate-400">Category</th>
+                <th class="py-2.5 text-slate-400">Description</th>
+                <th class="py-2.5 text-right text-slate-400">Amount</th>
+                <th class="py-2.5 text-right text-slate-400">Action</th>
               </tr>
             </thead>
             <tbody id="hh-log-tbody" class="divide-y divide-slate-800/70"></tbody>
@@ -544,11 +548,11 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-6">
-          <input id="p-log-date" type="date" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white" />
-          <select id="p-log-cat" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white"></select>
-          <input id="p-log-desc" type="text" placeholder="Description" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white" />
+          <input id="p-log-date" type="date" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200" />
+          <select id="p-log-cat" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200"></select>
+          <input id="p-log-desc" type="text" placeholder="Description" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200" />
           <div class="flex gap-2">
-            <input id="p-log-amt" type="number" step="0.01" placeholder="Amount ($)" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white" />
+            <input id="p-log-amt" type="number" step="0.01" placeholder="Amount ($)" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200" />
             <button onclick="addExpense('p')" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-sm whitespace-nowrap">Add</button>
           </div>
         </div>
@@ -557,17 +561,17 @@
           <table class="w-full text-xs sm:text-sm text-left">
             <thead class="text-slate-400 border-b border-slate-800 uppercase text-[11px]">
               <tr>
-                <th class="py-2.5">Date</th>
-                <th class="py-2.5">Category</th>
-                <th class="py-2.5">Description</th>
-                <th class="py-2.5 text-right">Amount</th>
-                <th class="py-2.5 text-right">Action</th>
+                <th class="py-2.5 text-slate-400">Date</th>
+                <th class="py-2.5 text-slate-400">Category</th>
+                <th class="py-2.5 text-slate-400">Description</th>
+                <th class="py-2.5 text-right text-slate-400">Amount</th>
+                <th class="py-2.5 text-right text-slate-400">Action</th>
               </tr>
             </thead>
             <tbody id="p-log-tbody" class="divide-y divide-slate-800/70"></tbody>
-            <tfoot class="border-t-2 border-slate-700 font-bold text-white">
+            <tfoot class="border-t-2 border-slate-700 font-bold text-slate-200">
               <tr>
-                <td colspan="3" class="py-3">Total Personal Logged Spend</td>
+                <td colspan="3" class="py-3 text-slate-200">Total Personal Logged Spend</td>
                 <td id="p-log-total" class="py-3 text-right text-emerald-400">$0.00</td>
                 <td></td>
               </tr>
@@ -688,18 +692,18 @@
 
         tbody.innerHTML += `
           <tr class="hover:bg-slate-800/30 transition">
-            <td class="py-3 px-2 font-medium text-white">
+            <td class="py-3 px-2 font-medium text-slate-200">
               <div class="flex items-center gap-2.5">
                 <span class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-base shrink-0">${cat.icon}</span>
                 <div>
-                  <div>${cat.name}</div>
+                  <div class="text-slate-200">${cat.name}</div>
                   <span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">${cat.group}</span>
                 </div>
               </div>
             </td>
             <td class="py-3 px-2 text-right">
               <input type="number" step="0.01" value="${mo.toFixed(2)}" onchange="updateHhCat(${idx}, 'mo', this.value)"
-                class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-white focus:outline-none focus:border-blue-500" />
+                class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-slate-200 focus:outline-none focus:border-blue-500" />
             </td>
             <td class="py-3 px-2 text-right">
               <input type="number" step="0.01" value="${fn.toFixed(2)}" onchange="updateHhCat(${idx}, 'fn', this.value)"
@@ -817,18 +821,18 @@
 
         tbody.innerHTML += `
           <tr class="hover:bg-slate-800/30 transition">
-            <td class="py-3 px-2 font-medium text-white">
+            <td class="py-3 px-2 font-medium text-slate-200">
               <div class="flex items-center gap-2.5">
                 <span class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-base shrink-0">${cat.icon}</span>
                 <div>
-                  <div>${cat.name}</div>
+                  <div class="text-slate-200">${cat.name}</div>
                   <span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">${cat.account}</span>
                 </div>
               </div>
             </td>
             <td class="py-3 px-2 text-right">
               <input type="number" step="0.01" value="${mo.toFixed(2)}" onchange="updatePCat(${idx}, 'mo', this.value)"
-                class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-white focus:outline-none focus:border-blue-500" />
+                class="w-28 bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-right text-slate-200 focus:outline-none focus:border-blue-500" />
             </td>
             <td class="py-3 px-2 text-right">
               <input type="number" step="0.01" value="${fn.toFixed(2)}" onchange="updatePCat(${idx}, 'fn', this.value)"
@@ -1015,14 +1019,14 @@
       } else {
         tbody.innerHTML = list.map(item => `
           <tr>
-            <td class="py-2.5 text-slate-400">${item.date}</td>
-            <td class="py-2.5 font-medium text-white">
+            <td class="py-2.5 text-slate-300">${item.date}</td>
+            <td class="py-2.5 font-medium text-slate-200">
               <span class="mr-1.5">${getCategoryIcon(type, item.cat)}</span>${item.cat}
             </td>
             <td class="py-2.5 text-slate-300">${item.desc}</td>
-            <td class="py-2.5 text-right font-semibold text-white">${fmt(item.amt)}</td>
+            <td class="py-2.5 text-right font-semibold text-slate-200">${fmt(item.amt)}</td>
             <td class="py-2.5 text-right">
-              <button onclick="deleteExpense('${type}', ${item.id})" class="text-rose-400 hover:text-rose-300 text-xs font-semibold">Remove</button>
+              <button onclick="deleteExpense('${type}', ${item.id})" class="text-rose-400 hover:text-rose-300 text-xs font-semibold px-2 py-1 rounded bg-rose-500/10 border border-rose-500/20">Remove</button>
             </td>
           </tr>
         `).join('');
